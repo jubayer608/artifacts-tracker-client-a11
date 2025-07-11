@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import ArtifactCard from '../Shared/ArtifactCard';
+import React, { useEffect, useState } from "react";
+import ArtifactCard from "../Shared/ArtifactCard";
 
 const AllArtifacts = () => {
   const [artifacts, setArtifacts] = useState([]);
-  const [search, setSearch] = useState('');
-  const [query, setQuery] = useState('');
+  const [search, setSearch] = useState("");
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     fetch(`http://localhost:3000/artifacts?search=${query}`)
@@ -24,7 +24,6 @@ const AllArtifacts = () => {
         All Artifacts
       </h1>
 
-      {/* Search Input */}
       <form
         onSubmit={handleSearch}
         className="mb-10 max-w-xl mx-auto flex items-center gap-3"
@@ -44,7 +43,6 @@ const AllArtifacts = () => {
         </button>
       </form>
 
-      {/* Artifacts Grid */}
       <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
         {artifacts.length > 0 ? (
           artifacts.map((artifact) => (

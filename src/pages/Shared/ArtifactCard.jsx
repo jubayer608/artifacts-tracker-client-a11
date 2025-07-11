@@ -19,57 +19,63 @@ const ArtifactCard = ({ artifact }) => {
 
   const { user } = useContext(AuthContext);
 
-  const toggleLike = () => {
-    if (!user?.email) {
-      alert("Please log in to like artifacts.");
-      return;
-    }
+  const toggleLike = async () => {
+  if (!user?.email) {
+    alert("Please log in to like artifacts.");
+    return;
+  }
 
-    if (!_id) {
-      alert("Invalid artifact ID");
-      return;
-    }
+  if (!_id) {
+    alert("Invalid artifact ID");
+    return;
+  }
 
-    const newLiked = !liked;
-    setLiked(newLiked);
-    setLikeCount((prev) => prev + (newLiked ? 1 : -1));
+  const newLiked = !liked;
+  setLiked(newLiked);
+  setLikeCount(prev => prev + (newLiked ? 1 : -1));
 
-    fetch(`http://localhost:3000/artifacts/${_id}/like`, {
+  try {
+    // Update like count on artifact
+    const res = await fetch(`http://localhost:3000/artifacts/${_id}/like`, {
       method: "PATCH",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${user.accessToken}`,
+      },
       body: JSON.stringify({ liked: newLiked }),
-    })
-      .then(async (res) => {
-        if (!res.ok) {
-          throw new Error(
-            (await res.json()).message || "Failed to update like"
-          );
-        }
+    });
 
-        if (newLiked) {
-          return fetch("http://localhost:3000/liked-artifacts", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              artifactId: _id,
-              userEmail: user.email,
-            }),
-          });
-        } else {
-          // Optional: handle unlike case with DELETE (if backend supports)
-        }
-      })
-      .then((res) => {
-        if (res && !res.ok) {
-          throw new Error("Failed to save to liked_artifacts");
-        }
-      })
-      .catch((err) => {
-        setLiked(liked); // revert state
-        setLikeCount((prev) => prev - (newLiked ? 1 : -1));
-        alert(err.message || "Error while liking artifact");
-      });
-  };
+    if (!res.ok) {
+      throw new Error("Failed to update like count");
+    }
+
+    // Add or remove from liked-artifacts collection
+    const url = newLiked 
+      ? "http://localhost:3000/liked-artifacts" 
+      : "http://localhost:3000/liked-artifacts/unlike";
+
+    const likeRes = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${user.accessToken}`,
+      },
+      body: JSON.stringify({
+        artifactId: _id,
+        userEmail: user.email,
+      }),
+    });
+
+    if (!likeRes.ok) {
+      throw new Error(newLiked ? "Failed to like artifact" : "Failed to unlike artifact");
+    }
+  } catch (err) {
+    setLiked(!newLiked); // revert to previous state
+    setLikeCount(prev => prev - (newLiked ? 1 : -1));
+    alert(err.message || "Error while updating like status");
+  }
+};
+
   return (
     <motion.div
       className="bg-white rounded-2xl shadow-lg overflow-hidden transition-all hover:shadow-2xl cursor-pointer group"

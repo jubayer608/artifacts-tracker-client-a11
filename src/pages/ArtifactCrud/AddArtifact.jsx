@@ -22,44 +22,57 @@ const AddArtifact = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const artifactData = {
-      ...formData,
-      adderName: user.displayName,
-      adderEmail: user.email,
-      likeCount: 0,
-    };
-
-    fetch('http://localhost:3000/artifacts', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(artifactData),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.insertedId || data.acknowledged) {
-          Swal.fire({
-            icon: 'success',
-            title: 'Success!',
-            text: 'Artifact added successfully!',
-            confirmButtonColor: '#5d4634'
-          });
-          setFormData({
-            name: '', image: '', type: '', historicalContext: '',
-            description: '', createdAt: '', discoveredAt: '',
-            discoveredBy: '', location: ''
-          });
-        }
-      })
-      .catch(() => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Something went wrong!',
-        });
-      });
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+  const artifactData = {
+    ...formData,
+    adderName: user.displayName,
+    adderEmail: user.email,
+    likeCount: 0,
   };
+
+  try {
+    const token = await user.getIdToken(); 
+
+    const res = await fetch('http://localhost:3000/artifacts', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}` 
+      },
+      body: JSON.stringify(artifactData),
+    });
+
+    const data = await res.json();
+
+    if (res.ok && (data.insertedId || data.acknowledged)) {
+      Swal.fire({
+        icon: 'success',
+        title: 'Success!',
+        text: 'Artifact added successfully!',
+        confirmButtonColor: '#5d4634'
+      });
+      setFormData({
+        name: '', image: '', type: '', historicalContext: '',
+        description: '', createdAt: '', discoveredAt: '',
+        discoveredBy: '', location: ''
+      });
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error!',
+        text: data.message || 'Failed to add artifact',
+      });
+    }
+  } catch (err) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Something went wrong! Try again.',
+    });
+  }
+};
+
 
   return (
     <section className="bg-[#fdf6e3] py-16 px-6 md:px-20 font-serif min-h-screen">

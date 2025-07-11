@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
-import { FaHeart } from 'react-icons/fa';
+import React, { useContext, useEffect, useState } from "react";
+import { useParams } from "react-router";
+import { FaHeart } from "react-icons/fa";
+import { AuthContext } from "../../contexts/AuthContext/AuthContext";
 
 const ArtifactDetails = () => {
+  const { user } = useContext(AuthContext);
   const { id } = useParams();
   const [artifact, setArtifact] = useState(null);
   const [liked, setLiked] = useState(false);
@@ -17,35 +19,70 @@ const ArtifactDetails = () => {
       });
   }, [id]);
 
-  const handleLike = () => {
+  const handleLike = async () => {
     const newLiked = !liked;
     setLiked(newLiked);
-    setLikeCount(prev => prev + (newLiked ? 1 : -1));
+    setLikeCount((prev) => prev + (newLiked ? 1 : -1));
 
-    fetch(`http://localhost:3000/artifacts/${id}/like`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ liked: newLiked })
-    }).then(async res => {
-      if (!res.ok) {
-        setLiked(!newLiked);
-        setLikeCount(prev => prev - (newLiked ? 1 : -1));
-        const error = await res.json();
-        alert(error.message || 'Failed to update like count');
+    try {
+      const res = await fetch(`http://localhost:3000/artifacts/${id}/like`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.accessToken}`,
+        },
+        body: JSON.stringify({ liked: newLiked }),
+      });
+
+      if (!res.ok) throw new Error("Failed to update like count");
+
+      const likedPayload = { artifactId: id, userEmail: user.email };
+      const likedEndpoint = `http://localhost:3000/liked-artifacts`;
+
+      if (newLiked) {
+        await fetch(likedEndpoint, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user.accessToken}`,
+          },
+          body: JSON.stringify(likedPayload),
+        });
+      } else {
+        await fetch(`${likedEndpoint}/unlike`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user.accessToken}`,
+          },
+          body: JSON.stringify(likedPayload),
+        });
       }
-    }).catch(() => {
+    } catch (error) {
       setLiked(!newLiked);
-      setLikeCount(prev => prev - (newLiked ? 1 : -1));
-      alert('Network error');
-    });
+      setLikeCount((prev) => prev - (newLiked ? 1 : -1));
+      alert(error.message || "Something went wrong");
+    }
   };
 
-  if (!artifact) return <div className="text-center p-10"><span className="loading loading-spinner text-warning"></span>
-<span className="loading loading-spinner text-error"></span></div>;
+  if (!artifact)
+    return (
+      <div className="text-center p-10">
+        <span className="loading loading-spinner text-warning"></span>
+        <span className="loading loading-spinner text-error"></span>
+      </div>
+    );
 
   const {
-    name, image, description, historicalContext,
-    createdAt, discoveredAt, discoveredBy, location, type
+    name,
+    image,
+    description,
+    historicalContext,
+    createdAt,
+    discoveredAt,
+    discoveredBy,
+    location,
+    type,
   } = artifact;
 
   return (
@@ -60,18 +97,30 @@ const ArtifactDetails = () => {
         <p className="text-gray-700 mb-4">{description}</p>
 
         <ul className="text-gray-800 mb-6 space-y-1">
-          <li><strong>Type:</strong> {type}</li>
-          <li><strong>Created At:</strong> {createdAt}</li>
-          <li><strong>Discovered At:</strong> {discoveredAt}</li>
-          <li><strong>Discovered By:</strong> {discoveredBy}</li>
-          <li><strong>Location:</strong> {location}</li>
-          <li><strong>Historical Context:</strong> {historicalContext}</li>
+          <li>
+            <strong>Type:</strong> {type}
+          </li>
+          <li>
+            <strong>Created At:</strong> {createdAt}
+          </li>
+          <li>
+            <strong>Discovered At:</strong> {discoveredAt}
+          </li>
+          <li>
+            <strong>Discovered By:</strong> {discoveredBy}
+          </li>
+          <li>
+            <strong>Location:</strong> {location}
+          </li>
+          <li>
+            <strong>Historical Context:</strong> {historicalContext}
+          </li>
         </ul>
 
         <button
           onClick={handleLike}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition ${
-            liked ? 'text-red-600' : 'text-gray-500 hover:text-red-500'
+            liked ? "text-red-600" : "text-gray-500 hover:text-red-500"
           }`}
         >
           <FaHeart className="text-lg" />

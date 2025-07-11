@@ -9,13 +9,29 @@ const MyArtifactsPage = () => {
   const [artifacts, setArtifacts] = useState([]);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (user?.email) {
-      fetch(`http://localhost:3000/my-artifacts/${user.email}`)
-        .then(res => res.json())
-        .then(data => setArtifacts(data));
+ useEffect(() => {
+  const fetchArtifacts = async () => {
+    if (!user?.email || !user?.accessToken) return;
+
+    try {
+      const res = await fetch(`http://localhost:3000/my-artifacts/${user.email}`, {
+        headers: {
+          Authorization: `Bearer ${user.accessToken}`,
+        }
+      });
+
+      if (!res.ok) throw new Error("Unauthorized");
+
+      const data = await res.json();
+      setArtifacts(data);
+    } catch (err) {
+      console.error("Failed to fetch artifacts", err);
+      setArtifacts([]);
     }
-  }, [user]);
+  };
+
+  fetchArtifacts();
+}, [user]);
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -29,7 +45,10 @@ const MyArtifactsPage = () => {
     }).then(result => {
       if (result.isConfirmed) {
         fetch(`http://localhost:3000/artifacts/${id}`, {
-          method: 'DELETE'
+          method: 'DELETE',
+          headers: {
+          Authorization: `Bearer ${user.accessToken}`,
+  }
         })
           .then(res => res.json())
           .then(data => {

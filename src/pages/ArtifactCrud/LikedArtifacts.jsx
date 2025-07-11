@@ -2,25 +2,36 @@ import React, { useEffect, useState, useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthContext/AuthContext';
 import ArtifactCard from '../Shared/ArtifactCard';
 
-
 const LikedArtifacts = () => {
   const { user } = useContext(AuthContext);
   const [liked, setLiked] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (user?.email) {
-      fetch(`http://localhost:3000/liked-artifacts/${user.email}`)
-        .then(res => res.json())
-        .then(data => {
-          setLiked(data);
-          setLoading(false);
-        })
-        .catch(() => {
-          setLiked([]);
-          setLoading(false);
+    const fetchLikedArtifacts = async () => {
+      if (!user?.email || !user?.accessToken) return;
+
+      try {
+        const res = await fetch(`http://localhost:3000/liked-artifacts/${user.email}`, {
+          headers: {
+            Authorization: `Bearer ${user.accessToken}`
+          }
         });
-    }
+
+        if (!res.ok) {
+          throw new Error('Unauthorized or Error fetching liked artifacts');
+        }
+
+        const data = await res.json();
+        setLiked(data);
+      } catch (error) {
+        setLiked([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchLikedArtifacts();
   }, [user]);
 
   if (loading) {

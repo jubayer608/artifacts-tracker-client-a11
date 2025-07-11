@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
+import { AuthContext } from '../../contexts/AuthContext/AuthContext';
 
 const UpdateArtifact = () => {
   const { id } = useParams();
   const [artifact, setArtifact] = useState(null);
   const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     fetch(`http://localhost:3000/artifacts/${id}`)
@@ -29,7 +31,10 @@ const UpdateArtifact = () => {
 
     fetch(`http://localhost:3000/artifacts/${id}`, {
       method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${user.accessToken}` 
+      },
       body: JSON.stringify(updated),
     })
       .then(res => res.json())
@@ -37,7 +42,12 @@ const UpdateArtifact = () => {
         if (data.modifiedCount > 0) {
           Swal.fire('Updated!', 'Artifact updated successfully.', 'success');
           navigate('/my-artifacts');
+        } else {
+          Swal.fire('Failed', 'No changes made or unauthorized.', 'warning');
         }
+      })
+      .catch(() => {
+        Swal.fire('Error', 'Something went wrong!', 'error');
       });
   };
 
@@ -67,4 +77,3 @@ const UpdateArtifact = () => {
 };
 
 export default UpdateArtifact;
-
