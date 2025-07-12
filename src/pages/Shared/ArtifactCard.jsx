@@ -35,7 +35,7 @@ const ArtifactCard = ({ artifact }) => {
   setLikeCount(prev => prev + (newLiked ? 1 : -1));
 
   try {
-    // Update like count on artifact
+    
     const res = await fetch(`http://localhost:3000/artifacts/${_id}/like`, {
       method: "PATCH",
       headers: {
@@ -49,7 +49,7 @@ const ArtifactCard = ({ artifact }) => {
       throw new Error("Failed to update like count");
     }
 
-    // Add or remove from liked-artifacts collection
+    
     const url = newLiked 
       ? "http://localhost:3000/liked-artifacts" 
       : "http://localhost:3000/liked-artifacts/unlike";
@@ -70,7 +70,7 @@ const ArtifactCard = ({ artifact }) => {
       throw new Error(newLiked ? "Failed to like artifact" : "Failed to unlike artifact");
     }
   } catch (err) {
-    setLiked(!newLiked); // revert to previous state
+    setLiked(!newLiked); 
     setLikeCount(prev => prev - (newLiked ? 1 : -1));
     alert(err.message || "Error while updating like status");
   }

@@ -1,4 +1,3 @@
-// ArtifactJourney.jsx
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FaMapMarkerAlt, FaClock, FaCheckCircle } from 'react-icons/fa';
