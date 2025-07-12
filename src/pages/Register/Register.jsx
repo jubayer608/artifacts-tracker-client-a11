@@ -45,7 +45,7 @@ const Register = () => {
 
       navigate("/");
     } catch (err) {
-      console.error(err);
+      // console.error(err);
       Swal.fire({
         icon: "error",
         title: "Registration Failed",

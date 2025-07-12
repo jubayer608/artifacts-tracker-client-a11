@@ -24,7 +24,7 @@ const SignIn = () => {
 
     try {
       const result = await signInUser(email, password);
-      console.log("Login successful:", result.user);
+      // console.log("Login successful:", result.user);
 
       Swal.fire({
         icon: "success",
@@ -36,7 +36,7 @@ const SignIn = () => {
 
       navigate(from, { replace: true });
     } catch (error) {
-      console.error("Login error:", error);
+      // console.error("Login error:", error);
 
       Swal.fire({
         icon: "error",
