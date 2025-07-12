@@ -11,7 +11,6 @@ const SignIn = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
-
   const [loading, setLoading] = useState(false);
 
   const handleSignIn = async (e) => {
