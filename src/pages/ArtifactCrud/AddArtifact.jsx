@@ -2,7 +2,6 @@ import React, { useContext, useState } from 'react';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../contexts/AuthContext/AuthContext';
 
-
 const AddArtifact = () => {
   const { user } = useContext(AuthContext);
   const [formData, setFormData] = useState({
