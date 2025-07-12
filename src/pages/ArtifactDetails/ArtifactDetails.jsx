@@ -11,7 +11,7 @@ const ArtifactDetails = () => {
   const [likeCount, setLikeCount] = useState(0);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/artifacts/${id}`)
+    fetch(`https://artifacts-tracker-server-one.vercel.app/artifacts/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setArtifact(data);
@@ -25,7 +25,7 @@ const ArtifactDetails = () => {
     setLikeCount((prev) => prev + (newLiked ? 1 : -1));
 
     try {
-      const res = await fetch(`http://localhost:3000/artifacts/${id}/like`, {
+      const res = await fetch(`https://artifacts-tracker-server-one.vercel.app/artifacts/${id}/like`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -37,7 +37,7 @@ const ArtifactDetails = () => {
       if (!res.ok) throw new Error("Failed to update like count");
 
       const likedPayload = { artifactId: id, userEmail: user.email };
-      const likedEndpoint = `http://localhost:3000/liked-artifacts`;
+      const likedEndpoint = `https://artifacts-tracker-server-one.vercel.app/liked-artifacts`;
 
       if (newLiked) {
         await fetch(likedEndpoint, {

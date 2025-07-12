@@ -14,7 +14,7 @@ const MyArtifactsPage = () => {
     if (!user?.email || !user?.accessToken) return;
 
     try {
-      const res = await fetch(`http://localhost:3000/my-artifacts/${user.email}`, {
+      const res = await fetch(`https://artifacts-tracker-server-one.vercel.app/my-artifacts/${user.email}`, {
         headers: {
           Authorization: `Bearer ${user.accessToken}`,
         }
@@ -44,7 +44,7 @@ const MyArtifactsPage = () => {
       confirmButtonText: 'Yes, delete it!'
     }).then(result => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/artifacts/${id}`, {
+        fetch(`https://artifacts-tracker-server-one.vercel.app/artifacts/${id}`, {
           method: 'DELETE',
           headers: {
           Authorization: `Bearer ${user.accessToken}`,

@@ -36,7 +36,7 @@ const ArtifactCard = ({ artifact }) => {
 
   try {
     
-    const res = await fetch(`http://localhost:3000/artifacts/${_id}/like`, {
+    const res = await fetch(`https://artifacts-tracker-server-one.vercel.app/artifacts/${_id}/like`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -51,8 +51,8 @@ const ArtifactCard = ({ artifact }) => {
 
     
     const url = newLiked 
-      ? "http://localhost:3000/liked-artifacts" 
-      : "http://localhost:3000/liked-artifacts/unlike";
+      ? "https://artifacts-tracker-server-one.vercel.app/liked-artifacts" 
+      : "https://artifacts-tracker-server-one.vercel.app/liked-artifacts/unlike";
 
     const likeRes = await fetch(url, {
       method: "POST",

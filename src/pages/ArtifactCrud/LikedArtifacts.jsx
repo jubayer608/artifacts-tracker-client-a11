@@ -12,7 +12,7 @@ const LikedArtifacts = () => {
       if (!user?.email || !user?.accessToken) return;
 
       try {
-        const res = await fetch(`http://localhost:3000/liked-artifacts/${user.email}`, {
+        const res = await fetch(`https://artifacts-tracker-server-one.vercel.app/liked-artifacts/${user.email}`, {
           headers: {
             Authorization: `Bearer ${user.accessToken}`
           }

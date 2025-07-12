@@ -33,7 +33,7 @@ const AddArtifact = () => {
   try {
     const token = await user.getIdToken(); 
 
-    const res = await fetch('http://localhost:3000/artifacts', {
+    const res = await fetch('https://artifacts-tracker-server-one.vercel.app/artifacts', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -10,7 +10,7 @@ const UpdateArtifact = () => {
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/artifacts/${id}`)
+    fetch(`https://artifacts-tracker-server-one.vercel.app/artifacts/${id}`)
       .then(res => res.json())
       .then(data => setArtifact(data));
   }, [id]);
@@ -29,7 +29,7 @@ const UpdateArtifact = () => {
       location: form.location.value,
     };
 
-    fetch(`http://localhost:3000/artifacts/${id}`, {
+    fetch(`https://artifacts-tracker-server-one.vercel.app/artifacts/${id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',

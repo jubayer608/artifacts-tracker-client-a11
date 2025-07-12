@@ -7,7 +7,7 @@ const AllArtifacts = () => {
   const [query, setQuery] = useState("");
 
   useEffect(() => {
-    fetch(`http://localhost:3000/artifacts?search=${query}`)
+    fetch(`https://artifacts-tracker-server-one.vercel.app/artifacts?search=${query}`)
       .then((res) => res.json())
       .then((data) => setArtifacts(data))
       .catch(() => setArtifacts([]));

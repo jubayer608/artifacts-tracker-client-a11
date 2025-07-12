@@ -7,7 +7,7 @@ const FeaturedArtifactsSection = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('http://localhost:3000/featured-artifacts')
+    fetch('https://artifacts-tracker-server-one.vercel.app/featured-artifacts')
       .then((res) => res.json())
       .then((data) => {
         setArtifacts(data);
