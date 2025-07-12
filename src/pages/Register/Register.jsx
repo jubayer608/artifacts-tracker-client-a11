@@ -17,7 +17,7 @@ const Register = () => {
     const email = form.email.value.trim();
     const password = form.password.value;
 
-    // Validation
+  
     const hasUpper = /[A-Z]/.test(password);
     const hasLower = /[a-z]/.test(password);
     const isLongEnough = password.length >= 6;
