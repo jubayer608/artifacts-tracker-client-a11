@@ -10,7 +10,7 @@ const SocialLogin = ({ from }) => {
   const handleGoogleSignIn = () => {
     signInWithGoogle()
       .then((result) => {
-        console.log("Google Sign In Success:", result.user);
+        // console.log("Google Sign In Success:", result.user);
         Swal.fire({
           icon: "success",
           title: "Login Successful",
@@ -21,7 +21,7 @@ const SocialLogin = ({ from }) => {
         navigate(from || "/");
       })
       .catch((error) => {
-        console.error(error);
+        // console.error(error);
         Swal.fire({
           icon: "error",
           title: "Google Sign In Failed",

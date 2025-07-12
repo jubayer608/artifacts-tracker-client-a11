@@ -17,44 +17,43 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Create user with email & password
+ 
   const createUser = (email, password) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
-  // Update user profile (name, photo)
+ 
   const updateUserProfile = async (profile) => {
     if (!auth.currentUser) return Promise.reject('No user logged in');
     try {
       await updateProfile(auth.currentUser, profile);
-      await auth.currentUser.reload(); // Refresh user data
-      setUser(auth.currentUser); // Update context
+      await auth.currentUser.reload(); 
+      setUser(auth.currentUser); 
     } catch (error) {
       console.error('Error updating profile:', error);
       throw error;
     }
   };
 
-  // Email/password sign in
+ 
   const signInUser = (email, password) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-  // Google popup sign in
+ 
   const signInWithGoogle = () => {
     setLoading(true);
     return signInWithPopup(auth, googleProvider);
   };
 
-  // Sign out
   const signOutUser = () => {
     setLoading(true);
     return signOut(auth);
   };
 
-  // Monitor auth state changes
+ 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);

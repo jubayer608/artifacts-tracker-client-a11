@@ -25,7 +25,7 @@ const MyArtifactsPage = () => {
       const data = await res.json();
       setArtifacts(data);
     } catch (err) {
-      console.error("Failed to fetch artifacts", err);
+      // console.error("Failed to fetch artifacts", err);
       setArtifacts([]);
     }
   };
