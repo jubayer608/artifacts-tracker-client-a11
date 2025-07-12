@@ -9,9 +9,7 @@ const Home = () => {
       <div className="m-10">
         <BannerSlider></BannerSlider>
       </div>
-
       <FeaturedArtifactsSection></FeaturedArtifactsSection>
-
       <ArtifactJourney></ArtifactJourney>
       <div className="m-10 w-full mx-auto">
         <RestorerSpotlight></RestorerSpotlight>
