@@ -51,7 +51,7 @@ const UpdateArtifact = () => {
       });
   };
 
-  if (!artifact) return <p>Loading...</p>;
+  if (!artifact) return <span className="loading loading-spinner text-error"></span>;
 
   return (
     <div className="px-6 md:px-20 py-14 bg-[#fdf6e3] min-h-screen">
