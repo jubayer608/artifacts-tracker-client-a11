@@ -14,7 +14,6 @@ import MyArtifactsPage from "../pages/ArtifactCrud/MyArtifactsPage";
 import UpdateArtifact from "../pages/ArtifactCrud/UpdateArtifact";
 import NotFound from "../routes/NotFound";
 
-
 const router = createBrowserRouter([
   {
     path: "/",
