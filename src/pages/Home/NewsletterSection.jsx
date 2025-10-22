@@ -17,8 +17,8 @@ const NewsletterSection = () => {
   };
 
   return (
-    <section className="bg-primary py-20 px-6 md:px-20 font-serif">
-      <div className="max-w-4xl mx-auto text-center">
+    <section className="bg-primary-900 py-20 font-serif">
+      <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -31,10 +31,10 @@ const NewsletterSection = () => {
             </div>
           </div>
           
-          <h2 className="text-3xl md:text-4xl font-bold text-primary-content mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-base-100 mb-4">
             Stay Updated
           </h2>
-          <p className="text-primary-content/80 text-lg mb-8 max-w-2xl mx-auto">
+          <p className="text-base-100/80 text-lg mb-8 max-w-2xl mx-auto">
             Get the latest updates on new artifacts, restoration projects, and historical discoveries delivered to your inbox.
           </p>
 
@@ -47,7 +47,7 @@ const NewsletterSection = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email address"
-                    className="w-full px-4 py-3 pr-12 rounded-lg border-2 border-base-300 focus:border-primary-content focus:outline-none bg-base-100 text-base-content"
+                  className="w-full px-4 py-3 pr-12 rounded-lg border-2 border-base-100/40 focus:border-base-100 focus:outline-none text-gray-900"
                     required
                   />
                   <FiMail className="absolute right-4 top-1/2 transform -translate-y-1/2 text-base-content/50" />
@@ -71,7 +71,7 @@ const NewsletterSection = () => {
             </motion.div>
           )}
 
-          <p className="text-primary-content/80 text-sm mt-4">
+          <p className="text-base-100/80 text-sm mt-4">
             We respect your privacy. Unsubscribe at any time.
           </p>
         </motion.div>

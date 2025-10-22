@@ -31,7 +31,7 @@ const NavBar = () => {
     `font-display text-base transition-colors duration-200 ${
       isActive
         ? "text-primary font-semibold border-b-2 border-primary pb-1"
-        : "hover:text-primary"
+        : "text-base-content/80 hover:text-primary"
     }`;
 
   const publicNavLinks = (

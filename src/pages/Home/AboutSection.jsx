@@ -27,8 +27,8 @@ const AboutSection = () => {
   ];
 
   return (
-    <section className="bg-base-100 py-20 px-6 md:px-20">
-      <div className="max-w-7xl mx-auto">
+    <section className="bg-base-100 py-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -36,10 +36,10 @@ const AboutSection = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6 font-serif">
+          <h2 className="text-4xl md:text-5xl font-bold text-base-content mb-6 font-serif">
             About Artifacts Tracker
           </h2>
-          <p className="text-lg text-base-content/70 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg text-base-content/80 max-w-3xl mx-auto leading-relaxed">
             We are passionate about preserving and sharing the world's cultural heritage. 
             Our platform connects history enthusiasts, researchers, and institutions to 
             document, explore, and celebrate the artifacts that tell the story of human civilization.
@@ -54,12 +54,12 @@ const AboutSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="text-center p-6 rounded-xl hover:bg-base-200/60 transition-colors duration-300"
+              className="text-center p-6 rounded-xl hover:bg-base-200 transition-colors duration-300"
             >
               <div className="inline-flex items-center justify-center w-16 h-16 bg-primary text-primary-content rounded-full mb-4">
                 <feature.icon className="text-2xl" />
               </div>
-              <h3 className="text-xl font-semibold text-primary mb-3">
+              <h3 className="text-xl font-semibold text-base-content mb-3">
                 {feature.title}
               </h3>
               <p className="text-base-content/70 text-sm leading-relaxed">
@@ -74,7 +74,7 @@ const AboutSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="bg-gradient-to-r from-primary to-[#4b3727] rounded-2xl p-8 md:p-12 text-center text-primary-content"
+          className="bg-gradient-to-r from-primary-900 to-[#4b3727] rounded-2xl p-8 md:p-12 text-center text-white"
         >
           <h3 className="text-2xl md:text-3xl font-bold mb-4 font-serif">
             Join Our Mission
@@ -84,10 +84,10 @@ const AboutSection = () => {
             sharing your knowledge, and connecting with fellow history enthusiasts.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-base-100 text-primary px-8 py-3 rounded-lg font-medium hover:bg-base-200 transition-all duration-300">
+            <button className="btn bg-base-100 text-primary px-8 py-3 rounded-lg font-medium hover:bg-base-200 transition-all duration-300">
               Start Exploring
             </button>
-            <button className="border-2 border-primary-content text-primary-content px-8 py-3 rounded-lg font-medium hover:bg-primary-content hover:text-primary transition-all duration-300">
+            <button className="btn btn-outline border-base-100 text-base-100 px-8 py-3 rounded-lg font-medium hover:bg-base-100 hover:text-primary transition-all duration-300">
               Learn More
             </button>
           </div>

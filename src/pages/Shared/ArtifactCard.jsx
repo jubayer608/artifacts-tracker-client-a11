@@ -85,7 +85,7 @@ const ArtifactCard = ({ artifact, viewMode = 'grid' }) => {
   if (viewMode === 'list') {
     return (
       <motion.div
-        className="bg-base-100 rounded-2xl shadow-lg overflow-hidden transition-all hover:shadow-xl cursor-pointer group"
+        className="bg-base-100 rounded-2xl shadow-lg overflow-hidden transition-all hover:shadow-xl cursor-pointer group border border-base-300"
         whileHover={{ scale: 1.01 }}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -100,9 +100,9 @@ const ArtifactCard = ({ artifact, viewMode = 'grid' }) => {
             />
           </div>
 
-          <div className="p-6 font-serif flex-1 flex flex-col justify-between">
+            <div className="p-6 font-serif flex-1 flex flex-col justify-between">
             <div>
-              <h2 className="text-xl md:text-2xl font-bold text-primary mb-2">
+              <h2 className="text-xl md:text-2xl font-bold text-base-content mb-2">
                 {name}
               </h2>
               <p className="text-base-content/70 mb-4">
@@ -126,14 +126,14 @@ const ArtifactCard = ({ artifact, viewMode = 'grid' }) => {
               <div className="flex gap-2">
                 <Link to="/compare">
                   <button 
-                    className="px-3 py-2 text-sm rounded-lg bg-gray-600 text-white hover:bg-gray-700 transition"
+                    className="px-3 py-2 text-sm rounded-lg bg-neutral text-neutral-content hover:bg-neutral/80 transition"
                     title="Add to comparison"
                   >
                     <FiPlus className="w-4 h-4" />
                   </button>
                 </Link>
                 <Link to={`/artifacts/${_id}`}>
-                  <button className="px-6 py-2 text-sm rounded-lg bg-primary text-primary-content hover:bg-primary/90 transition">
+                  <button className="px-6 py-2 text-sm rounded-lg btn btn-primary">
                     View Details
                   </button>
                 </Link>
@@ -147,7 +147,7 @@ const ArtifactCard = ({ artifact, viewMode = 'grid' }) => {
 
   return (
     <motion.div
-      className="bg-base-100 rounded-2xl shadow-lg overflow-hidden transition-all hover:shadow-2xl cursor-pointer group"
+      className="bg-base-100 rounded-2xl shadow-lg overflow-hidden transition-all hover:shadow-2xl cursor-pointer group border border-base-300"
       whileHover={{ scale: 1.02 }}
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
@@ -162,7 +162,7 @@ const ArtifactCard = ({ artifact, viewMode = 'grid' }) => {
       </div>
 
       <div className="p-5 font-serif flex flex-col justify-between h-[280px]">
-        <h2 className="text-xl md:text-2xl font-bold text-primary mb-2">
+        <h2 className="text-xl md:text-2xl font-bold text-base-content mb-2">
           {name}
         </h2>
         <p className="text-sm text-base-content/70 flex-1">
@@ -184,14 +184,14 @@ const ArtifactCard = ({ artifact, viewMode = 'grid' }) => {
           <div className="flex gap-2">
             <Link to="/compare">
               <button 
-                className="px-3 py-1.5 text-sm rounded-md bg-gray-600 text-white hover:bg-gray-700 transition"
+                className="px-3 py-1.5 text-sm rounded-md bg-neutral text-neutral-content hover:bg-neutral/80 transition"
                 title="Add to comparison"
               >
                 <FiPlus className="w-4 h-4" />
               </button>
             </Link>
             <Link to={`/artifacts/${_id}`}>
-              <button className="px-4 py-1.5 text-sm rounded-md bg-primary text-primary-content hover:bg-primary/90 transition">
+              <button className="px-4 py-1.5 text-sm rounded-md btn btn-primary">
                 View Details
               </button>
             </Link>
