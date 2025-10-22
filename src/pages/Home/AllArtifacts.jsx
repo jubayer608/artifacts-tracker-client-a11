@@ -14,9 +14,7 @@ const AllArtifacts = () => {
   const [showFilters, setShowFilters] = useState(false);
 
   useEffect(() => {
-    if (query.trim() || sortBy !== "name" || sortOrder !== "asc") {
-      performSearch();
-    }
+    performSearch();
   }, [query, sortBy, sortOrder]);
 
   const performSearch = async () => {
