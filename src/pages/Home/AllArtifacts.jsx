@@ -14,9 +14,8 @@ const AllArtifacts = () => {
   const [showFilters, setShowFilters] = useState(false);
 
   useEffect(() => {
-    if (query.trim() || sortBy !== "name" || sortOrder !== "asc") {
-      performSearch();
-    }
+    // Load all artifacts by default
+    performSearch();
   }, [query, sortBy, sortOrder]);
 
   const performSearch = async () => {
@@ -40,7 +39,6 @@ const AllArtifacts = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    setPage(1);
     setQuery(search.trim());
   };
 
