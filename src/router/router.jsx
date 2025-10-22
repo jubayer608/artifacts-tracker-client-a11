@@ -12,6 +12,9 @@ import AddArtifact from "../pages/ArtifactCrud/AddArtifact";
 import LikedArtifacts from "../pages/ArtifactCrud/LikedArtifacts";
 import MyArtifactsPage from "../pages/ArtifactCrud/MyArtifactsPage";
 import UpdateArtifact from "../pages/ArtifactCrud/UpdateArtifact";
+import About from "../pages/About/About";
+import Search from "../pages/Search/Search";
+import CompareArtifacts from "../pages/Compare/CompareArtifacts";
 import NotFound from "../routes/NotFound";
 
 const router = createBrowserRouter([
@@ -55,6 +58,18 @@ const router = createBrowserRouter([
         {
             path:"/register",
            Component:Register
+        },
+        {
+            path:"/about",
+            Component:About
+        },
+        {
+            path:"/search",
+            element:<PrivateRoute><Search></Search></PrivateRoute>
+        },
+        {
+            path:"/compare",
+            element:<PrivateRoute><CompareArtifacts></CompareArtifacts></PrivateRoute>
         },
         
     ]
