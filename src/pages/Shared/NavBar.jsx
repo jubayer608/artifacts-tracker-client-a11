@@ -135,7 +135,7 @@ const NavBar = () => {
                     role="button"
                     className="btn btn-ghost btn-circle avatar"
                   >
-                    <div className="w-8 h-8 rounded-full ring-2 ring-[#5d4634] ring-offset-2">
+                    <div className="w-8 h-8 rounded-full ring-2 ring-primary ring-offset-2">
                       <img
                         alt="User Profile"
                         src={user.photoURL || "/default-avatar.png"}
