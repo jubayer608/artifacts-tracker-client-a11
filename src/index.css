@@ -38,19 +38,19 @@
 }
 
 [data-theme="dark"] .bg-\[#5d4634\] {
-  background-color: #8B7355 !important;
+  background-color: #d4a017 !important;
 }
 
 [data-theme="dark"] .border-\[#5d4634\] {
-  border-color: #8B7355 !important;
+  border-color: #d4a017 !important;
 }
 
 [data-theme="dark"] .ring-\[#5d4634\] {
-  --tw-ring-color: #8B7355 !important;
+  --tw-ring-color: #d4a017 !important;
 }
 
 [data-theme="dark"] .hover\:bg-\[#4b3727\]:hover {
-  background-color: #A68B5B !important;
+  background-color: #f5d680 !important;
 }
 
 [data-theme="dark"] .bg-\[#f5f0e8\] {

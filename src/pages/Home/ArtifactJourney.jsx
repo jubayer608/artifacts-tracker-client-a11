@@ -52,8 +52,8 @@ const ArtifactJourney = () => {
           >
             <div className="flex flex-col items-start text-left">
               {step.icon}
-              <h3 className="text-xl font-bold text-[#5d4634] mb-1">{step.title}</h3>
-              <p className="text-gray-700 text-sm">{step.description}</p>
+              <h3 className="text-xl font-bold text-[#5d4634] dark:text-[#d4a017] mb-1">{step.title}</h3>
+              <p className="text-gray-700 dark:text-gray-300 text-sm">{step.description}</p>
             </div>
           </motion.div>
         ))}

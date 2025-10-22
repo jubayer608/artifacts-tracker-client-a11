@@ -57,7 +57,7 @@ const FeaturedArtifactsSection = () => {
             </div>
           </>
         ) : (
-          <p className="text-center opacity-70">No featured artifacts found.</p>
+          <p className="text-center text-gray-600 dark:text-gray-400">No featured artifacts found.</p>
         )}
       </div>
     </section>
