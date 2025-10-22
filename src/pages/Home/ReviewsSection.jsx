@@ -80,7 +80,7 @@ const ReviewsSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="bg-[#fdf6e3] rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300"
+              className="bg-[#fdf6e3] dark:bg-[#2d2d2d] rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300"
             >
               <div className="flex items-center mb-4">
                 <img

@@ -26,12 +26,12 @@ const NewsletterSection = () => {
           transition={{ duration: 0.8 }}
         >
           <div className="flex justify-center mb-6">
-            <div className="p-4 bg-[#fdf6e3] rounded-full">
-              <FiMail className="w-8 h-8 text-[#5d4634]" />
+            <div className="p-4 bg-[#fdf6e3] dark:bg-[#1a1a1a] rounded-full">
+              <FiMail className="w-8 h-8 text-[#5d4634] dark:text-[#d4a017]" />
             </div>
           </div>
           
-          <h2 className="text-3xl md:text-4xl font-bold text-[#fdf6e3] mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#fdf6e3] dark:text-[#1a1a1a] mb-4">
             Stay Updated
           </h2>
           <p className="text-[#e5ddca] dark:text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
@@ -54,7 +54,7 @@ const NewsletterSection = () => {
                 </div>
                 <button
                   type="submit"
-                  className="btn bg-[#fdf6e3] text-[#5d4634] hover:bg-[#e5ddca] font-semibold px-6 py-3 rounded-lg transition-all duration-200 flex items-center justify-center gap-2"
+                  className="btn bg-[#fdf6e3] dark:bg-[#1a1a1a] text-[#5d4634] dark:text-[#d4a017] hover:bg-[#e5ddca] dark:hover:bg-[#2d2d2d] font-semibold px-6 py-3 rounded-lg transition-all duration-200 flex items-center justify-center gap-2"
                 >
                   <FiSend className="w-4 h-4" />
                   Subscribe
@@ -65,7 +65,7 @@ const NewsletterSection = () => {
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="bg-[#fdf6e3] text-[#5d4634] px-6 py-4 rounded-lg font-semibold"
+              className="bg-[#fdf6e3] dark:bg-[#1a1a1a] text-[#5d4634] dark:text-[#d4a017] px-6 py-4 rounded-lg font-semibold"
             >
               Thank you for subscribing! 🎉
             </motion.div>
