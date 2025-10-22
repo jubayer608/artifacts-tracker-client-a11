@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { FaHeart } from "react-icons/fa";
+import { FiClock } from "react-icons/fi";
 import { Link } from "react-router";
 import { motion } from "framer-motion";
 import { AuthContext } from "../../contexts/AuthContext/AuthContext";
@@ -113,11 +114,19 @@ const ArtifactCard = ({ artifact }) => {
             <span>{likeCount}</span>
           </button>
 
-          <Link to={`/artifacts/${_id}`}>
-            <button className="px-4 py-1.5 text-sm rounded-md bg-[#5d4634] text-[#fdf6e3] hover:bg-[#4b3727] transition">
-              View Details
-            </button>
-          </Link>
+          <div className="flex gap-2">
+            <Link to={`/timeline/${_id}`}>
+              <button className="px-3 py-1.5 text-sm rounded-md border border-[#5d4634] text-[#5d4634] hover:bg-[#5d4634] hover:text-[#fdf6e3] transition flex items-center gap-1">
+                <FiClock className="text-xs" />
+                Timeline
+              </button>
+            </Link>
+            <Link to={`/artifacts/${_id}`}>
+              <button className="px-4 py-1.5 text-sm rounded-md bg-[#5d4634] text-[#fdf6e3] hover:bg-[#4b3727] transition">
+                View Details
+              </button>
+            </Link>
+          </div>
         </div>
       </div>
     </motion.div>

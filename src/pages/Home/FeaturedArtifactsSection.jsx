@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ArtifactCard from '../Shared/ArtifactCard';
 import { Link } from 'react-router';
+import LoadingSpinner from '../../components/LoadingSpinner';
 
 const FeaturedArtifactsSection = () => {
   const [artifacts, setArtifacts] = useState([]);
@@ -34,7 +35,7 @@ const FeaturedArtifactsSection = () => {
 
        
         {loading ? (
-          <p className="text-center text-gray-600">Loading featured artifacts...</p>
+          <LoadingSpinner text="Loading featured artifacts..." />
         ) : artifacts.length > 0 ? (
           <>
             <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
