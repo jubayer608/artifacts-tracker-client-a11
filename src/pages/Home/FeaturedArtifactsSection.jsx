@@ -30,14 +30,14 @@ const FeaturedArtifactsSection = () => {
   }, []);
 
   return (
-    <section className="bg-base-100 dark:bg-gray-900 py-20 px-6 md:px-20 font-serif">
+    <section className="bg-base-200 py-20 mt-14 px-6 md:px-20 font-serif">
       <div className="max-w-7xl mx-auto">
 
         <div className="text-center mb-14">
-          <h2 className="text-4xl md:text-5xl font-bold text-base-content dark:text-gray-100 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4">
             Featured Artifacts
           </h2>
-          <p className="text-base-content/70 dark:text-gray-300 text-lg max-w-2xl mx-auto">
+          <p className="text-base-content/70 text-lg max-w-2xl mx-auto">
             Discover the most admired historical treasures, loved by the community.
           </p>
         </div>
@@ -53,7 +53,7 @@ const FeaturedArtifactsSection = () => {
             </div>
 
             <div className="mt-12 text-center">
-              <Link to="/artifacts" className="btn bg-[#5d4634] text-[#fdf6e3] hover:bg-[#4b3727] dark:bg-[#8B7355] dark:hover:bg-[#A68B5B] text-lg">See All Artifacts</Link>
+              <Link to="/artifacts" className="btn bg-primary text-primary-content hover:bg-primary/90 text-lg">See All Artifacts</Link>
             </div>
           </>
         ) : (

@@ -31,12 +31,12 @@ const timeline = [
 
 const ArtifactJourney = () => {
   return (
-    <section className="bg-base-200 dark:bg-gray-800 py-20 px-6 md:px-20 font-serif">
+    <section className="bg-base-200 my-14 py-20 px-6 md:px-20 font-serif">
       <div className="max-w-6xl mx-auto text-center mb-12">
-        <h2 className="text-4xl md:text-5xl font-bold text-base-content dark:text-gray-100 mb-4">
+        <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4">
           Journey of a Historical Artifact
         </h2>
-        <p className="text-base-content/70 dark:text-gray-300 text-lg max-w-2xl mx-auto">
+        <p className="text-base-content/70 text-lg max-w-2xl mx-auto">
           Follow the timeline of how an ancient artifact moves from excavation to exhibition.
         </p>
       </div>

@@ -26,7 +26,7 @@ const NewsletterSection = () => {
           transition={{ duration: 0.8 }}
         >
           <div className="flex justify-center mb-6">
-            <div className="p-4 bg-primary-content rounded-full">
+            <div className="p-4 bg-base-100 rounded-full">
               <FiMail className="w-8 h-8 text-primary" />
             </div>
           </div>
@@ -47,14 +47,14 @@ const NewsletterSection = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email address"
-                    className="w-full px-4 py-3 pr-12 rounded-lg border-2 border-primary-content/30 focus:border-primary-content bg-white text-gray-800 focus:outline-none"
+                    className="w-full px-4 py-3 pr-12 rounded-lg border-2 border-base-300 focus:border-primary-content focus:outline-none bg-base-100 text-base-content"
                     required
                   />
-                  <FiMail className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                  <FiMail className="absolute right-4 top-1/2 transform -translate-y-1/2 text-base-content/50" />
                 </div>
                 <button
                   type="submit"
-                  className="btn bg-primary-content text-primary hover:bg-primary-content/90 font-semibold px-6 py-3 rounded-lg transition-all duration-200 flex items-center justify-center gap-2"
+                  className="btn bg-base-100 text-primary hover:bg-base-200 font-semibold px-6 py-3 rounded-lg transition-all duration-200 flex items-center justify-center gap-2"
                 >
                   <FiSend className="w-4 h-4" />
                   Subscribe
@@ -65,13 +65,13 @@ const NewsletterSection = () => {
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="bg-primary-content text-primary px-6 py-4 rounded-lg font-semibold"
+              className="bg-base-100 text-primary px-6 py-4 rounded-lg font-semibold"
             >
               Thank you for subscribing! 🎉
             </motion.div>
           )}
 
-          <p className="text-primary-content/70 text-sm mt-4">
+          <p className="text-primary-content/80 text-sm mt-4">
             We respect your privacy. Unsubscribe at any time.
           </p>
         </motion.div>

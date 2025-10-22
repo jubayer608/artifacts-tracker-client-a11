@@ -8,9 +8,9 @@ import StatsSection from "./StatsSection";
 
 const Home = () => {
   return (
-    <div className="bg-base-100 dark:bg-gray-900">
+    <div className="space-y-16">
       {/* Hero Section */}
-      <div className="px-6 md:px-10 pt-10">
+      <div className="px-6 md:px-20">
         <BannerSlider></BannerSlider>
       </div>
       
@@ -30,7 +30,9 @@ const Home = () => {
       </div>
       
       {/* Restorer Spotlight Section */}
-      <RestorerSpotlight></RestorerSpotlight>
+      <div className="px-6 md:px-20 w-full mx-auto">
+        <RestorerSpotlight></RestorerSpotlight>
+      </div>
       
       {/* Reviews Section */}
       <div className="w-full">
