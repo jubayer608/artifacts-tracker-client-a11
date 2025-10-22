@@ -1,31 +1,51 @@
-import { useEffect, useMemo, useState } from "react";
-import { ThemeContext } from "./ThemeContext";
+import React, { createContext, useContext, useEffect, useState } from 'react';
 
-const getInitialTheme = () => {
-  const stored = localStorage.getItem("theme");
-  if (stored === "light" || stored === "dark") return stored;
-  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-  return prefersDark ? "dark" : "light";
+const ThemeContext = createContext();
+
+export const useTheme = () => {
+  const context = useContext(ThemeContext);
+  if (!context) {
+    throw new Error('useTheme must be used within a ThemeProvider');
+  }
+  return context;
 };
 
 const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState(getInitialTheme);
+  const [theme, setTheme] = useState('light');
 
   useEffect(() => {
-    const root = document.documentElement;
-    if (theme === "dark") {
-      root.classList.add("dark");
-    } else {
-      root.classList.remove("dark");
+    // Check for saved theme preference or default to 'light'
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    if (savedTheme) {
+      setTheme(savedTheme);
+    } else if (prefersDark) {
+      setTheme('dark');
     }
-    localStorage.setItem("theme", theme);
+  }, []);
+
+  useEffect(() => {
+    // Apply theme to document
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
   }, [theme]);
 
-  const toggleTheme = () => setTheme((t) => (t === "dark" ? "light" : "dark"));
+  const toggleTheme = () => {
+    setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
+  };
 
-  const value = useMemo(() => ({ theme, toggleTheme }), [theme]);
+  const value = {
+    theme,
+    toggleTheme,
+    isDark: theme === 'dark'
+  };
 
-  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
+  return (
+    <ThemeContext.Provider value={value}>
+      {children}
+    </ThemeContext.Provider>
+  );
 };
 
 export default ThemeProvider;

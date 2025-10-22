@@ -1,12 +1,12 @@
 import { useContext } from "react";
 import { Link, NavLink } from "react-router";
 import { AuthContext } from "../../contexts/AuthContext/AuthContext";
-import { ThemeContext } from "../../contexts/ThemeContext/ThemeContext";
-import { FiLogOut, FiHeart, FiFolder, FiSun, FiMoon } from "react-icons/fi";
+import { useTheme } from "../../contexts/ThemeContext/ThemeProvider";
+import { FiLogOut, FiHeart, FiFolder, FiSearch, FiUser, FiSun, FiMoon } from "react-icons/fi";
 
 const NavBar = () => {
   const { user, signOutUser } = useContext(AuthContext);
-  const { theme, toggleTheme } = useContext(ThemeContext);
+  const { theme, toggleTheme, isDark } = useTheme();
 
   const handleSignOut = () => {
     signOutUser()
@@ -18,191 +18,226 @@ const NavBar = () => {
       });
   };
 
+  // Public navigation links (3 routes for logged-out users)
   const publicNavLinks = (
     <>
       <li>
-        <NavLink to="/" className="font-display text-base hover:text-[#5d4634] transition-colors">
+        <NavLink 
+          to="/" 
+          className="font-display text-base hover:text-primary transition-colors duration-200"
+        >
           Home
         </NavLink>
       </li>
       <li>
-        <NavLink to="/artifacts" className="font-display text-base hover:text-[#5d4634] transition-colors">
+        <NavLink 
+          to="/artifacts" 
+          className="font-display text-base hover:text-primary transition-colors duration-200"
+        >
           All Artifacts
         </NavLink>
       </li>
       <li>
-        <NavLink to="/about" className="font-display text-base">
+        <NavLink 
+          to="/about" 
+          className="font-display text-base hover:text-primary transition-colors duration-200"
+        >
           About
         </NavLink>
       </li>
+    </>
+  );
+
+  // Protected navigation links (5+ routes for logged-in users)
+  const protectedNavLinks = (
+    <>
       <li>
-        <NavLink to="/newsletter" className="font-display text-base">
-          Newsletter
+        <NavLink 
+          to="/" 
+          className="font-display text-base hover:text-primary transition-colors duration-200"
+        >
+          Home
         </NavLink>
       </li>
-      {user && (
-        <>
-          <li>
-            <NavLink to="/add-artifact" className="font-display text-base">
-              Add Artifact
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/my-artifacts" className="font-display text-base">
-              My Artifacts
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/liked-artifacts" className="font-display text-base">
-              Liked Artifacts
-            </NavLink>
-          </li>
-        </>
-      )}
+      <li>
+        <NavLink 
+          to="/artifacts" 
+          className="font-display text-base hover:text-primary transition-colors duration-200"
+        >
+          All Artifacts
+        </NavLink>
+      </li>
+      <li>
+        <NavLink 
+          to="/add-artifact" 
+          className="font-display text-base hover:text-primary transition-colors duration-200"
+        >
+          Add Artifact
+        </NavLink>
+      </li>
+      <li>
+        <NavLink 
+          to="/my-artifacts" 
+          className="font-display text-base hover:text-primary transition-colors duration-200"
+        >
+          My Artifacts
+        </NavLink>
+      </li>
+      <li>
+        <NavLink 
+          to="/liked-artifacts" 
+          className="font-display text-base hover:text-primary transition-colors duration-200"
+        >
+          Favorites
+        </NavLink>
+      </li>
+      <li>
+        <NavLink 
+          to="/compare" 
+          className="font-display text-base hover:text-primary transition-colors duration-200"
+        >
+          Compare
+        </NavLink>
+      </li>
     </>
   );
 
   return (
-    <div className="bg-[#fdf6e3] dark:bg-slate-900 text-gray-800 dark:text-gray-100 font-serif shadow-md sticky top-0 z-50">
-      <div className="navbar max-w-7xl mx-auto px-4">
-      <div className="navbar-start">
-        <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+    <nav className="w-full bg-base-100 text-base-content font-serif shadow-lg sticky top-0 z-50 border-b border-base-300">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
+          {/* Logo */}
+          <div className="flex-shrink-0">
+            <Link
+              to="/"
+              className="flex items-center space-x-2 text-xl font-display text-primary hover:text-primary/80 transition-colors duration-200"
             >
-              {user ? privateNavLinks : publicNavLinks}
-            </ul>
+              <span className="text-2xl">🏺</span>
+              <span className="font-bold">Artifacts Tracker</span>
+            </Link>
           </div>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 dark:bg-slate-800 rounded-box w-60"
-          >
-            🏺 Artifacts Tracker
-          </Link>
-        </div>
-        <Link
-          to="/"
-          className="btn btn-ghost normal-case text-xl font-display text-[#5d4634] dark:text-[#e5ddca]"
-        >
-          🏺 Artifacts Tracker
-        </Link>
-      </div>
 
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1 gap-2">
-            {user ? privateNavLinks : publicNavLinks}
-          </ul>
-        </div>
-
-      <div className="navbar-end gap-2">
-        <button
-          onClick={toggleTheme}
-          aria-label="Toggle theme"
-          className="btn btn-ghost btn-circle"
-        >
-          {theme === "dark" ? <FiSun /> : <FiMoon />}
-        </button>
-        {!user ? (
-          <Link
-            to="/signIn"
-            className="btn btn-primary font-display"
-          >
-            Login
-          </Link>
-        ) : (
-          <div className="dropdown dropdown-end">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-circle avatar"
-            >
-              <div className="w-10 rounded-full ring ring-[#5d4634] ring-offset-2 ring-offset-[#fdf6e3] dark:ring-offset-slate-900">
-                <img
-                  alt="User Profile"
-                  src={user.photoURL || "/default-avatar.png"}
-                />
-              </div>
+          {/* Desktop Navigation */}
+          <div className="hidden lg:block">
+            <div className="ml-10 flex items-baseline space-x-8">
+              {user ? protectedNavLinks : publicNavLinks}
             </div>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-3 shadow bg-base-100 dark:bg-slate-800 rounded-box w-60"
+          </div>
+
+          {/* User Actions */}
+          <div className="flex items-center space-x-4">
+            {/* Theme Toggle */}
+            <button
+              onClick={toggleTheme}
+              className="btn btn-ghost btn-sm text-primary hover:bg-base-200 transition-all duration-200"
+              title={`Switch to ${isDark ? 'light' : 'dark'} mode`}
             >
-              <li className="mb-2">
-                <span className="text-sm text-gray-600 dark:text-gray-300 font-medium">
-                  {user.displayName}
-                </span>
-              </li>
-              <li>
-                <Link to="/my-artifacts" className="flex items-center gap-2">
-                  <FiFolder /> My Artifacts
-                </Link>
-              </li>
-              <li>
-                <Link to="/liked-artifacts" className="flex items-center gap-2">
-                  <FiHeart /> Liked Artifacts
-                </Link>
+              {isDark ? <FiSun className="w-4 h-4" /> : <FiMoon className="w-4 h-4" />}
+            </button>
+
+            {!user ? (
+              <div className="flex items-center space-x-3">
                 <Link
                   to="/signIn"
-                  className="btn font-display bg-[#5d4634] text-[#fdf6e3] hover:bg-[#4b3727]"
+                  className="btn btn-outline btn-sm font-display border-primary text-primary hover:bg-primary hover:text-primary-content transition-all duration-200"
                 >
-                  Login
+                  Sign In
+                </Link>
+                <Link
+                  to="/register"
+                  className="btn btn-sm font-display bg-primary text-primary-content hover:bg-primary/90 transition-all duration-200"
+                >
+                  Register
                 </Link>
               </div>
             ) : (
-            <div className="dropdown dropdown-end">
-              <div
-                tabIndex={0}
-                role="button"
-                className="btn btn-ghost btn-circle avatar"
-              >
-                <div className="w-10 rounded-full ring ring-[#5d4634] ring-offset-2">
-                  <img
-                    alt="User Profile"
-                    src={user.photoURL || "/default-avatar.png"}
-                  />
+              <div className="flex items-center space-x-3">
+                <Link
+                  to="/search"
+                  className="btn btn-ghost btn-sm text-primary hover:bg-base-200 transition-all duration-200"
+                >
+                  <FiSearch className="w-4 h-4" />
+                </Link>
+                <div className="dropdown dropdown-end">
+                  <div
+                    tabIndex={0}
+                    role="button"
+                    className="btn btn-ghost btn-circle avatar"
+                  >
+                    <div className="w-8 h-8 rounded-full ring-2 ring-[#5d4634] ring-offset-2">
+                      <img
+                        alt="User Profile"
+                        src={user.photoURL || "/default-avatar.png"}
+                        className="w-full h-full object-cover rounded-full"
+                      />
+                    </div>
+                  </div>
+                  <ul
+                    tabIndex={0}
+                    className="menu menu-sm dropdown-content mt-3 z-[1] p-3 shadow-lg bg-base-100 rounded-box w-64 border border-base-300"
+                  >
+                    <li className="mb-3 pb-2 border-b border-base-300">
+                      <div className="flex items-center space-x-2">
+                        <FiUser className="w-4 h-4 text-primary" />
+                        <span className="text-sm font-medium text-base-content">
+                          {user.displayName || user.email}
+                        </span>
+                      </div>
+                    </li>
+                    <li>
+                      <Link to="/my-artifacts" className="flex items-center gap-2 hover:bg-base-200 rounded-md p-2">
+                        <FiFolder className="w-4 h-4" /> My Artifacts
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/liked-artifacts" className="flex items-center gap-2 hover:bg-base-200 rounded-md p-2">
+                        <FiHeart className="w-4 h-4" /> Favorites
+                      </Link>
+                    </li>
+                    <li className="pt-2 border-t border-base-300">
+                      <button
+                        onClick={handleSignOut}
+                        className="flex items-center gap-2 text-error hover:bg-error/10 rounded-md p-2 w-full text-left"
+                      >
+                        <FiLogOut className="w-4 h-4" /> Sign Out
+                      </button>
+                    </li>
+                  </ul>
                 </div>
               </div>
-              <ul
-                tabIndex={0}
-                className="menu menu-sm dropdown-content mt-3 z-[1] p-3 shadow bg-base-100 rounded-box w-60"
-              >
-                <li className="mb-2">
-                  <span className="text-sm text-gray-600 font-medium">
-                    {user.displayName}
-                  </span>
-                </li>
-                <li>
-                  <Link to="/my-artifacts" className="flex items-center gap-2">
-                    <FiFolder /> My Artifacts
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/liked-artifacts" className="flex items-center gap-2">
-                    <FiHeart /> Liked Artifacts
-                  </Link>
-                </li>
-                <li>
-                  <button
-                    onClick={handleSignOut}
-                    className="flex items-center gap-2 text-red-600"
-                  >
-                    <FiLogOut /> Logout
-                  </button>
-                </li>
-              </ul>
-            </div>
             )}
+
+            {/* Mobile menu button */}
+            <div className="lg:hidden">
+              <div className="dropdown dropdown-end">
+                <div tabIndex={0} role="button" className="btn btn-ghost btn-sm">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M4 6h16M4 12h8m-8 6h16"
+                    />
+                  </svg>
+                </div>
+                <ul
+                  tabIndex={0}
+                  className="menu menu-sm dropdown-content mt-3 z-[1] p-3 shadow-lg bg-base-100 rounded-box w-52 border border-base-300"
+                >
+                  {user ? protectedNavLinks : publicNavLinks}
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      </div>
-      </div>
-    </div>
+    </nav>
   );
 };
 

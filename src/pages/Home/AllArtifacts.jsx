@@ -1,53 +1,42 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import ArtifactCard from "../Shared/ArtifactCard";
-import LoadingSpinner from "../../components/LoadingSpinner";
-import AdvancedSearch from "../../components/AdvancedSearch";
+import { FiSearch, FiFilter, FiArrowUp, FiArrowDown, FiGrid, FiList } from "react-icons/fi";
 
 const AllArtifacts = () => {
   const [artifacts, setArtifacts] = useState([]);
-  const [serverPagination, setServerPagination] = useState(true);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [query, setQuery] = useState("");
-  const [sortBy, setSortBy] = useState("name-asc");
-  const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(9);
-  const [total, setTotal] = useState(0);
+  const [sortBy, setSortBy] = useState("name");
+  const [sortOrder, setSortOrder] = useState("asc");
+  const [viewMode, setViewMode] = useState("grid");
+  const [showFilters, setShowFilters] = useState(false);
 
   useEffect(() => {
-    const controller = new AbortController();
-    const [field, direction] = sortBy.split("-");
+    if (query.trim() || sortBy !== "name" || sortOrder !== "asc") {
+      performSearch();
+    }
+  }, [query, sortBy, sortOrder]);
+
+  const performSearch = async () => {
     setLoading(true);
-    fetch(
-      `https://artifacts-tracker-server-one.vercel.app/artifacts?search=${encodeURIComponent(
-        query
-      )}&sort=${field}&order=${direction}&page=${page}&limit=${pageSize}`,
-      { signal: controller.signal }
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        if (Array.isArray(data)) {
-          // Fallback if API returns plain array
-          setServerPagination(false);
-          setArtifacts(data);
-          setTotal(data.length);
-        } else {
-          setServerPagination(true);
-          setArtifacts(data.items || []);
-          setTotal(data.total || 0);
-        }
-      })
-      .catch(() => {
-        setArtifacts([]);
-      })
-      .finally(() => setLoading(false));
+    try {
+      const queryParams = new URLSearchParams();
+      if (query.trim()) queryParams.append('search', query.trim());
+      queryParams.append('sortBy', sortBy);
+      queryParams.append('sortOrder', sortOrder);
 
-    return () => controller.abort();
-  }, [query, sortBy, page, pageSize]);
-
-  useEffect(() => {
-    applyFilters();
-  }, [artifacts, filters]);
+      const response = await fetch(`https://artifacts-tracker-server-one.vercel.app/artifacts?${queryParams}`);
+      const data = await response.json();
+      setArtifacts(data);
+    } catch (error) {
+      console.error('Search error:', error);
+      setArtifacts([]);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -55,118 +44,193 @@ const AllArtifacts = () => {
     setQuery(search.trim());
   };
 
-  const totalPages = useMemo(() => Math.max(1, Math.ceil(total / pageSize)), [total, pageSize]);
+  const handleSort = (field) => {
+    if (sortBy === field) {
+      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+    } else {
+      setSortBy(field);
+      setSortOrder("asc");
+    }
+  };
 
-  const displayedArtifacts = useMemo(() => {
-    if (serverPagination) return artifacts;
-    const [field, direction] = sortBy.split("-");
-    const sorted = [...artifacts].sort((a, b) => {
-      const va = (a?.[field] ?? "").toString().toLowerCase();
-      const vb = (b?.[field] ?? "").toString().toLowerCase();
-      if (field === "likeCount") {
-        return (Number(a.likeCount || 0) - Number(b.likeCount || 0)) * (direction === "asc" ? 1 : -1);
-      }
-      if (field === "createdAt") {
-        return va.localeCompare(vb) * (direction === "asc" ? 1 : -1);
-      }
-      return va.localeCompare(vb) * (direction === "asc" ? 1 : -1);
-    });
-    const start = (page - 1) * pageSize;
-    return sorted.slice(start, start + pageSize);
-  }, [artifacts, serverPagination, sortBy, page, pageSize]);
+  const clearSearch = () => {
+    setSearch("");
+    setQuery("");
+    setSortBy("name");
+    setSortOrder("asc");
+  };
 
   return (
-    <div className="bg-[#fdf6e3] dark:bg-slate-900 py-16 px-6 md:px-20 font-serif min-h-screen">
-      <h1 className="text-4xl text-[#5d4634] dark:text-[#e5ddca] font-bold mb-8 text-center">
-        All Artifacts
-      </h1>
-
-      <form
-        onSubmit={handleSearch}
-        className="mb-6 max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-[1fr_auto_auto] gap-3"
+    <div className="bg-[#fdf6e3] py-16 px-6 md:px-20 font-serif min-h-screen">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="max-w-7xl mx-auto"
       >
-        <input
-          type="text"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          placeholder="Search by artifact name..."
-          className="w-full px-4 py-2 rounded-lg border border-[#c8b8a5] focus:outline-none focus:ring-2 focus:ring-[#5d4634] bg-white dark:bg-slate-800 dark:text-gray-100"
-        />
-        <button
-          type="submit"
-          className="bg-[#5d4634] text-[#fdf6e3] px-5 py-2 rounded-lg hover:bg-[#4b3727] transition"
-        >
-          Search
-        </button>
-        <select
-          value={sortBy}
-          onChange={(e) => {
-            setPage(1);
-            setSortBy(e.target.value);
-          }}
-          className="px-3 py-2 rounded-lg border border-[#c8b8a5] bg-white dark:bg-slate-800 dark:text-gray-100"
-          aria-label="Sort artifacts"
-        >
-          <option value="name-asc">Name A-Z</option>
-          <option value="name-desc">Name Z-A</option>
-          <option value="createdAt-asc">Oldest First</option>
-          <option value="createdAt-desc">Newest First</option>
-          <option value="likeCount-desc">Most Liked</option>
-        </select>
-      </form>
-
-      {loading ? (
-        <div className="flex justify-center items-center py-20">
-          <span className="loading loading-spinner loading-lg text-warning"></span>
+        <div className="text-center mb-12">
+          <h1 className="text-4xl md:text-5xl text-[#5d4634] font-bold mb-4">
+            All Artifacts
+          </h1>
+          <p className="text-gray-700 text-lg max-w-2xl mx-auto">
+            Explore our comprehensive collection of historical artifacts from around the world.
+          </p>
         </div>
-      ) : (
-        <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
-          {(displayedArtifacts.length > 0) ? (
-            displayedArtifacts.map((artifact) => (
-              <ArtifactCard key={artifact._id} artifact={artifact} />
-            ))
-          ) : (
-            <p className="text-center text-gray-600 dark:text-gray-300 col-span-full">
-              No artifacts found.
-            </p>
+
+        {/* Search and Filter Bar */}
+        <div className="bg-white rounded-2xl shadow-lg p-6 mb-8">
+          <form onSubmit={handleSearch} className="mb-6">
+            <div className="flex flex-col md:flex-row gap-4">
+              <div className="flex-1 relative">
+                <FiSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <input
+                  type="text"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  placeholder="Search by artifact name, description, or keywords..."
+                  className="w-full pl-12 pr-4 py-3 rounded-lg border-2 border-[#e5ddca] focus:border-[#5d4634] focus:outline-none text-lg"
+                />
+              </div>
+              <button
+                type="submit"
+                className="btn bg-[#5d4634] text-[#fdf6e3] hover:bg-[#4b3727] px-6 py-3 rounded-lg transition-all duration-200"
+              >
+                Search
+              </button>
+              <button
+                type="button"
+                onClick={() => setShowFilters(!showFilters)}
+                className="btn btn-outline border-[#5d4634] text-[#5d4634] hover:bg-[#5d4634] hover:text-[#fdf6e3] px-6 py-3 rounded-lg transition-all duration-200"
+              >
+                <FiFilter className="w-4 h-4 mr-2" />
+                Filters
+              </button>
+            </div>
+          </form>
+
+          {/* Advanced Filters */}
+          {showFilters && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="border-t border-[#e5ddca] pt-6"
+            >
+              <div className="flex flex-wrap gap-4 items-center justify-between">
+                <div className="flex flex-wrap gap-4">
+                  <button
+                    onClick={() => handleSort('name')}
+                    className={`btn btn-sm ${sortBy === 'name' ? 'bg-[#5d4634] text-[#fdf6e3]' : 'btn-outline border-[#5d4634] text-[#5d4634]'} transition-all duration-200`}
+                  >
+                    {sortBy === 'name' && sortOrder === 'asc' ? <FiArrowUp className="w-4 h-4 mr-1" /> : <FiArrowDown className="w-4 h-4 mr-1" />}
+                    Name
+                  </button>
+                  <button
+                    onClick={() => handleSort('date')}
+                    className={`btn btn-sm ${sortBy === 'date' ? 'bg-[#5d4634] text-[#fdf6e3]' : 'btn-outline border-[#5d4634] text-[#5d4634]'} transition-all duration-200`}
+                  >
+                    {sortBy === 'date' && sortOrder === 'asc' ? <FiArrowUp className="w-4 h-4 mr-1" /> : <FiArrowDown className="w-4 h-4 mr-1" />}
+                    Date
+                  </button>
+                  <button
+                    onClick={() => handleSort('likes')}
+                    className={`btn btn-sm ${sortBy === 'likes' ? 'bg-[#5d4634] text-[#fdf6e3]' : 'btn-outline border-[#5d4634] text-[#5d4634]'} transition-all duration-200`}
+                  >
+                    {sortBy === 'likes' && sortOrder === 'asc' ? <FiArrowUp className="w-4 h-4 mr-1" /> : <FiArrowDown className="w-4 h-4 mr-1" />}
+                    Popularity
+                  </button>
+                </div>
+                
+                <div className="flex items-center gap-2">
+                  <span className="text-sm text-gray-600">View:</span>
+                  <button
+                    onClick={() => setViewMode('grid')}
+                    className={`btn btn-sm ${viewMode === 'grid' ? 'bg-[#5d4634] text-[#fdf6e3]' : 'btn-outline border-[#5d4634] text-[#5d4634]'} transition-all duration-200`}
+                  >
+                    <FiGrid className="w-4 h-4" />
+                  </button>
+                  <button
+                    onClick={() => setViewMode('list')}
+                    className={`btn btn-sm ${viewMode === 'list' ? 'bg-[#5d4634] text-[#fdf6e3]' : 'btn-outline border-[#5d4634] text-[#5d4634]'} transition-all duration-200`}
+                  >
+                    <FiList className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            </motion.div>
           )}
         </div>
-      )}
 
-      <div className="max-w-7xl mx-auto mt-8 flex flex-col md:flex-row items-center justify-between gap-3">
-        <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
-          <span>
-            Page {page} of {totalPages}
-          </span>
-          <select
-            value={pageSize}
-            onChange={(e) => {
-              setPage(1);
-              setPageSize(Number(e.target.value));
-            }}
-            className="px-2 py-1 rounded border border-[#c8b8a5] bg-white dark:bg-slate-800 dark:text-gray-100"
+        {/* Results Header */}
+        {artifacts.length > 0 && (
+          <div className="flex justify-between items-center mb-6">
+            <p className="text-gray-700">
+              Showing {artifacts.length} artifact{artifacts.length !== 1 ? 's' : ''}
+              {query && ` for "${query}"`}
+            </p>
+            {(query || sortBy !== 'name' || sortOrder !== 'asc') && (
+              <button
+                onClick={clearSearch}
+                className="btn btn-sm btn-outline text-red-600 border-red-600 hover:bg-red-600 hover:text-white"
+              >
+                Clear Filters
+              </button>
+            )}
+          </div>
+        )}
+
+        {/* Loading State */}
+        {loading && (
+          <div className="text-center py-12">
+            <div className="loading loading-spinner loading-lg text-[#5d4634]"></div>
+            <p className="text-gray-600 mt-4">Loading artifacts...</p>
+          </div>
+        )}
+
+        {/* Artifacts Grid/List */}
+        {!loading && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6 }}
+            className={`grid gap-6 ${
+              viewMode === 'grid' 
+                ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3' 
+                : 'grid-cols-1 max-w-4xl mx-auto'
+            }`}
           >
-            <option value={6}>6</option>
-            <option value={9}>9</option>
-            <option value={12}>12</option>
-          </select>
-          <span>per page</span>
-        </div>
-        <div className="join">
-          <button className="join-item btn" onClick={() => setPage(1)} disabled={page === 1}>
-            « First
-          </button>
-          <button className="join-item btn" onClick={() => setPage((p) => Math.max(1, p - 1))} disabled={page === 1}>
-            ‹ Prev
-          </button>
-          <button className="join-item btn" onClick={() => setPage((p) => Math.min(totalPages, p + 1))} disabled={page === totalPages}>
-            Next ›
-          </button>
-          <button className="join-item btn" onClick={() => setPage(totalPages)} disabled={page === totalPages}>
-            Last »
-          </button>
-        </div>
-      </div>
+            {artifacts.length > 0 ? (
+              artifacts.map((artifact, index) => (
+                <motion.div
+                  key={artifact._id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                >
+                  <ArtifactCard artifact={artifact} viewMode={viewMode} />
+                </motion.div>
+              ))
+            ) : (
+              <div className="col-span-full text-center py-12">
+                <div className="text-6xl mb-4">🔍</div>
+                <h3 className="text-2xl font-bold text-gray-600 mb-2">No artifacts found</h3>
+                <p className="text-gray-500 mb-6">
+                  {query ? `No results found for "${query}". Try different search terms.` : 'No artifacts available at the moment.'}
+                </p>
+                {query && (
+                  <button
+                    onClick={clearSearch}
+                    className="btn bg-[#5d4634] text-[#fdf6e3] hover:bg-[#4b3727]"
+                  >
+                    Clear Search
+                  </button>
+                )}
+              </div>
+            )}
+          </motion.div>
+        )}
+      </motion.div>
     </div>
   );
 };
