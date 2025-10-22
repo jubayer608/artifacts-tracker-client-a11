@@ -13,6 +13,8 @@ import LikedArtifacts from "../pages/ArtifactCrud/LikedArtifacts";
 import MyArtifactsPage from "../pages/ArtifactCrud/MyArtifactsPage";
 import UpdateArtifact from "../pages/ArtifactCrud/UpdateArtifact";
 import NotFound from "../routes/NotFound";
+import About from "../pages/Static/About";
+import Newsletter from "../pages/Static/Newsletter";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +24,14 @@ const router = createBrowserRouter([
         {
             index:true,
             Component:Home
+        },
+        {
+          path:"/about",
+          Component:About
+        },
+        {
+          path:"/newsletter",
+          Component:Newsletter
         },
         {
           path:"/artifacts",

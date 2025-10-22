@@ -1,10 +1,12 @@
 import { useContext } from "react";
 import { Link, NavLink } from "react-router";
 import { AuthContext } from "../../contexts/AuthContext/AuthContext";
-import { FiLogOut, FiHeart, FiFolder } from "react-icons/fi";
+import { ThemeContext } from "../../contexts/ThemeContext/ThemeContext";
+import { FiLogOut, FiHeart, FiFolder, FiSun, FiMoon } from "react-icons/fi";
 
 const NavBar = () => {
   const { user, signOutUser } = useContext(AuthContext);
+  const { theme, toggleTheme } = useContext(ThemeContext);
 
   const handleSignOut = () => {
     signOutUser()
@@ -29,15 +31,40 @@ const NavBar = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink to="/add-artifact" className="font-display text-base">
-          Add Artifact
+        <NavLink to="/about" className="font-display text-base">
+          About
         </NavLink>
       </li>
+      <li>
+        <NavLink to="/newsletter" className="font-display text-base">
+          Newsletter
+        </NavLink>
+      </li>
+      {user && (
+        <>
+          <li>
+            <NavLink to="/add-artifact" className="font-display text-base">
+              Add Artifact
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/my-artifacts" className="font-display text-base">
+              My Artifacts
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/liked-artifacts" className="font-display text-base">
+              Liked Artifacts
+            </NavLink>
+          </li>
+        </>
+      )}
     </>
   );
 
   return (
-    <div className="navbar bg-[#fdf6e3] text-gray-800 font-serif shadow-md sticky top-0 z-50">
+    <div className="bg-[#fdf6e3] dark:bg-slate-900 text-gray-800 dark:text-gray-100 font-serif shadow-md sticky top-0 z-50">
+      <div className="navbar max-w-7xl mx-auto px-4">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -58,14 +85,14 @@ const NavBar = () => {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 dark:bg-slate-800 rounded-box w-60"
           >
             {navLinks}
           </ul>
         </div>
         <Link
           to="/"
-          className="btn btn-ghost normal-case text-xl font-display text-[#5d4634]"
+          className="btn btn-ghost normal-case text-xl font-display text-[#5d4634] dark:text-[#e5ddca]"
         >
           🏺 Artifacts Tracker
         </Link>
@@ -75,7 +102,14 @@ const NavBar = () => {
         <ul className="menu menu-horizontal px-1 gap-1">{navLinks}</ul>
       </div>
 
-      <div className="navbar-end">
+      <div className="navbar-end gap-2">
+        <button
+          onClick={toggleTheme}
+          aria-label="Toggle theme"
+          className="btn btn-ghost btn-circle"
+        >
+          {theme === "dark" ? <FiSun /> : <FiMoon />}
+        </button>
         {!user ? (
           <Link
             to="/signIn"
@@ -90,7 +124,7 @@ const NavBar = () => {
               role="button"
               className="btn btn-ghost btn-circle avatar"
             >
-              <div className="w-10 rounded-full ring ring-[#5d4634] ring-offset-2">
+              <div className="w-10 rounded-full ring ring-[#5d4634] ring-offset-2 ring-offset-[#fdf6e3] dark:ring-offset-slate-900">
                 <img
                   alt="User Profile"
                   src={user.photoURL || "/default-avatar.png"}
@@ -99,10 +133,10 @@ const NavBar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-3 shadow bg-base-100 rounded-box w-60"
+              className="menu menu-sm dropdown-content mt-3 z-[1] p-3 shadow bg-base-100 dark:bg-slate-800 rounded-box w-60"
             >
               <li className="mb-2">
-                <span className="text-sm text-gray-600 font-medium">
+                <span className="text-sm text-gray-600 dark:text-gray-300 font-medium">
                   {user.displayName}
                 </span>
               </li>
@@ -127,6 +161,7 @@ const NavBar = () => {
             </ul>
           </div>
         )}
+      </div>
       </div>
     </div>
   );
