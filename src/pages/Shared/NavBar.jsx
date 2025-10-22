@@ -2,9 +2,12 @@ import { useContext } from "react";
 import { Link, NavLink } from "react-router";
 import { AuthContext } from "../../contexts/AuthContext/AuthContext";
 import { FiLogOut, FiHeart, FiFolder } from "react-icons/fi";
+import { useTheme } from "../../contexts/ThemeContext";
+import { BsSun, BsMoon, BsCircleHalf } from "react-icons/bs";
 
 const NavBar = () => {
   const { user, signOutUser } = useContext(AuthContext);
+  const { theme, resolvedTheme, setTheme } = useTheme();
 
   const handleSignOut = () => {
     signOutUser()
@@ -28,16 +31,39 @@ const NavBar = () => {
           All Artifacts
         </NavLink>
       </li>
-      <li>
-        <NavLink to="/add-artifact" className="font-display text-base">
-          Add Artifact
-        </NavLink>
-      </li>
+      {!user ? (
+        <>
+          <li>
+            <NavLink to="/register" className="font-display text-base">
+              Register
+            </NavLink>
+          </li>
+        </>
+      ) : (
+        <>
+          <li>
+            <NavLink to="/add-artifact" className="font-display text-base">
+              Add Artifact
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/my-artifacts" className="font-display text-base">
+              My Artifacts
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/liked-artifacts" className="font-display text-base">
+              Liked
+            </NavLink>
+          </li>
+        </>
+      )}
     </>
   );
 
   return (
-    <div className="navbar bg-[#fdf6e3] text-gray-800 font-serif shadow-md sticky top-0 z-50">
+    <div className="bg-base-100 text-base-content font-serif shadow-md sticky top-0 z-50">
+      <div className="navbar max-w-7xl mx-auto px-4">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -76,10 +102,33 @@ const NavBar = () => {
       </div>
 
       <div className="navbar-end">
+        <div className="mr-2 dropdown dropdown-end">
+          <div tabIndex={0} role="button" className="btn btn-ghost">
+            {resolvedTheme === "dark" ? <BsMoon /> : <BsSun />}
+            <span className="hidden md:inline text-sm">Theme</span>
+          </div>
+          <ul tabIndex={0} className="menu dropdown-content bg-base-100 rounded-box z-[1] w-40 p-2 shadow">
+            <li>
+              <button onClick={() => setTheme("light")} className={theme === "light" ? "active" : ""}>
+                <BsSun /> Light
+              </button>
+            </li>
+            <li>
+              <button onClick={() => setTheme("dark")} className={theme === "dark" ? "active" : ""}>
+                <BsMoon /> Dark
+              </button>
+            </li>
+            <li>
+              <button onClick={() => setTheme("system")} className={theme === "system" ? "active" : ""}>
+                <BsCircleHalf /> System
+              </button>
+            </li>
+          </ul>
+        </div>
         {!user ? (
           <Link
             to="/signIn"
-            className="btn font-display bg-[#5d4634] text-[#fdf6e3] hover:bg-[#4b3727]"
+            className="btn btn-primary font-display"
           >
             Login
           </Link>
@@ -127,6 +176,7 @@ const NavBar = () => {
             </ul>
           </div>
         )}
+      </div>
       </div>
     </div>
   );

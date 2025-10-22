@@ -78,7 +78,7 @@ const ArtifactCard = ({ artifact }) => {
 
   return (
     <motion.div
-      className="bg-white rounded-2xl shadow-lg overflow-hidden transition-all hover:shadow-2xl cursor-pointer group"
+      className="bg-base-100 rounded-2xl shadow-lg overflow-hidden transition-all hover:shadow-2xl cursor-pointer group border border-base-300"
       whileHover={{ scale: 1.02 }}
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
@@ -93,10 +93,10 @@ const ArtifactCard = ({ artifact }) => {
       </div>
 
       <div className="p-5 font-serif flex flex-col justify-between h-[280px]">
-        <h2 className="text-xl md:text-2xl font-bold text-[#5d4634] mb-2">
+        <h2 className="text-xl md:text-2xl font-bold text-base-content mb-2">
           {name}
         </h2>
-        <p className="text-sm text-gray-600 flex-1">
+        <p className="text-sm opacity-80 flex-1">
           {description?.length > 100
             ? description.slice(0, 100) + "..."
             : description}
@@ -113,11 +113,7 @@ const ArtifactCard = ({ artifact }) => {
             <span>{likeCount}</span>
           </button>
 
-          <Link to={`/artifacts/${_id}`}>
-            <button className="px-4 py-1.5 text-sm rounded-md bg-[#5d4634] text-[#fdf6e3] hover:bg-[#4b3727] transition">
-              View Details
-            </button>
-          </Link>
+          <Link to={`/artifacts/${_id}`} className="btn btn-primary btn-sm">View Details</Link>
         </div>
       </div>
     </motion.div>
