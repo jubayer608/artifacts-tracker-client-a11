@@ -34,10 +34,10 @@ const FeaturedArtifactsSection = () => {
       <div className="max-w-7xl mx-auto">
 
         <div className="text-center mb-14">
-          <h2 className="text-4xl md:text-5xl font-bold text-[#5d4634] mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-[#5d4634] dark:text-[#8B7355] mb-4">
             Featured Artifacts
           </h2>
-          <p className="text-gray-700 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-700 dark:text-gray-300 text-lg max-w-2xl mx-auto">
             Discover the most admired historical treasures, loved by the community.
           </p>
         </div>
@@ -53,7 +53,7 @@ const FeaturedArtifactsSection = () => {
             </div>
 
             <div className="mt-12 text-center">
-              <Link to="/artifacts" className="btn btn-primary text-lg">See All Artifacts</Link>
+              <Link to="/artifacts" className="btn bg-[#5d4634] text-[#fdf6e3] hover:bg-[#4b3727] dark:bg-[#8B7355] dark:hover:bg-[#A68B5B] text-lg">See All Artifacts</Link>
             </div>
           </>
         ) : (

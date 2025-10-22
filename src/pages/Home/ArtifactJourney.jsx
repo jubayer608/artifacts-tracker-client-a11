@@ -33,10 +33,10 @@ const ArtifactJourney = () => {
   return (
     <section className="bg-white py-20 px-6 md:px-20 font-serif">
       <div className="max-w-6xl mx-auto text-center mb-12">
-        <h2 className="text-4xl md:text-5xl font-bold text-[#5d4634] mb-4">
+        <h2 className="text-4xl md:text-5xl font-bold text-[#5d4634] dark:text-[#8B7355] mb-4">
           Journey of a Historical Artifact
         </h2>
-        <p className="text-gray-700 text-lg max-w-2xl mx-auto">
+        <p className="text-gray-700 dark:text-gray-300 text-lg max-w-2xl mx-auto">
           Follow the timeline of how an ancient artifact moves from excavation to exhibition.
         </p>
       </div>
@@ -52,7 +52,7 @@ const ArtifactJourney = () => {
           >
             <div className="flex flex-col items-start text-left">
               {step.icon}
-              <h3 className="text-xl font-bold text-[#5d4634] dark:text-[#d4a017] mb-1">{step.title}</h3>
+              <h3 className="text-xl font-bold text-[#5d4634] dark:text-[#8B7355] mb-1">{step.title}</h3>
               <p className="text-gray-700 dark:text-gray-300 text-sm">{step.description}</p>
             </div>
           </motion.div>

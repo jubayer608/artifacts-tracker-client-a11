@@ -77,73 +77,50 @@
   border-color: #555555 !important;
 }
 
-[data-theme="dark"] .border-\[#e5ddca\] {
-  border-color: #555555 !important;
-}
-
-[data-theme="dark"] .text-\[#e5ddca\] {
-  color: #D4C4A8 !important;
-}
-
-[data-theme="dark"] .text-\[#fdf6e3\] {
+/* Dark mode text color fixes */
+[data-theme="dark"] .text-base-content {
   color: #e5e5e5 !important;
 }
 
-[data-theme="dark"] .bg-\[#e5ddca\] {
-  background-color: #3d3d3d !important;
+[data-theme="dark"] .text-\[#e5ddca\] {
+  color: #c0c0c0 !important;
 }
 
-[data-theme="dark"] .hover\:bg-\[#e5ddca\]:hover {
-  background-color: #4d4d4d !important;
+[data-theme="dark"] .opacity-80 {
+  opacity: 0.8 !important;
 }
 
-[data-theme="dark"] .focus\:border-\[#5d4634\]:focus {
+[data-theme="dark"] .opacity-70 {
+  opacity: 0.7 !important;
+}
+
+/* Dark mode button fixes */
+[data-theme="dark"] .btn-primary {
+  background-color: #8B7355 !important;
   border-color: #8B7355 !important;
+  color: #e5e5e5 !important;
 }
 
-[data-theme="dark"] .focus\:border-\[#fdf6e3\]:focus {
-  border-color: #D4C4A8 !important;
+[data-theme="dark"] .btn-primary:hover {
+  background-color: #A68B5B !important;
+  border-color: #A68B5B !important;
 }
 
-/* Gradient overrides for dark mode */
-[data-theme="dark"] .bg-gradient-to-br {
-  background: linear-gradient(to bottom right, #8B7355, #6B5B47) !important;
-}
-
-/* Additional dark mode fixes for components */
-[data-theme="dark"] .dark\:bg-slate-800 {
-  background-color: #2d2d2d !important;
-}
-
-[data-theme="dark"] .dark\:text-\[#e5ddca\] {
-  color: #D4C4A8 !important;
-}
-
-/* Loading spinner dark mode */
-[data-theme="dark"] .loading-spinner {
-  color: #D4C4A8 !important;
-}
-
-/* Button overrides for dark mode */
 [data-theme="dark"] .btn-outline {
   border-color: #8B7355 !important;
-  color: #D4C4A8 !important;
+  color: #8B7355 !important;
 }
 
 [data-theme="dark"] .btn-outline:hover {
   background-color: #8B7355 !important;
-  color: #1a1a1a !important;
-}
-
-/* Input field overrides */
-[data-theme="dark"] input[type="text"], 
-[data-theme="dark"] input[type="email"] {
-  background-color: #2d2d2d !important;
   color: #e5e5e5 !important;
-  border-color: #555555 !important;
 }
 
-[data-theme="dark"] input[type="text"]:focus, 
-[data-theme="dark"] input[type="email"]:focus {
+/* Dark mode card and surface fixes */
+[data-theme="dark"] .bg-base-100 {
+  background-color: #2d2d2d !important;
+}
+
+[data-theme="dark"] .border-primary {
   border-color: #8B7355 !important;
 }

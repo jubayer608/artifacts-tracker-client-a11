@@ -85,7 +85,7 @@ const ArtifactCard = ({ artifact, viewMode = 'grid' }) => {
   if (viewMode === 'list') {
     return (
       <motion.div
-        className="bg-white rounded-2xl shadow-lg overflow-hidden transition-all hover:shadow-xl cursor-pointer group"
+        className="bg-white dark:bg-slate-800 rounded-2xl shadow-lg overflow-hidden transition-all hover:shadow-xl cursor-pointer group"
         whileHover={{ scale: 1.01 }}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -102,10 +102,10 @@ const ArtifactCard = ({ artifact, viewMode = 'grid' }) => {
 
           <div className="p-6 font-serif flex-1 flex flex-col justify-between">
             <div>
-              <h2 className="text-xl md:text-2xl font-bold text-[#5d4634] mb-2">
+              <h2 className="text-xl md:text-2xl font-bold text-[#5d4634] dark:text-[#8B7355] mb-2">
                 {name}
               </h2>
-              <p className="text-gray-600 mb-4">
+              <p className="text-gray-600 dark:text-gray-300 mb-4">
                 {description?.length > 200
                   ? description.slice(0, 200) + "..."
                   : description}
@@ -165,7 +165,7 @@ const ArtifactCard = ({ artifact, viewMode = 'grid' }) => {
         <h2 className="text-xl md:text-2xl font-bold text-[#5d4634] dark:text-[#e5ddca] mb-2">
           {name}
         </h2>
-        <p className="text-sm text-gray-600 flex-1">
+        <p className="text-sm text-gray-600 dark:text-gray-300 flex-1">
           {description?.length > 100 ? `${description.slice(0, 100)}...` : description}
         </p>
 

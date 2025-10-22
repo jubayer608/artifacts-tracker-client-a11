@@ -10,7 +10,7 @@ const Home = () => {
   return (
     <div className="w-full">
       {/* Hero Section */}
-      <div className="w-full px-6 md:px-20 py-10">
+      <div className="px-4 md:px-8 lg:px-16 py-8">
         <BannerSlider></BannerSlider>
       </div>
       
