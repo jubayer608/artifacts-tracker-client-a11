@@ -1,5 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import ArtifactCard from "../Shared/ArtifactCard";
+import LoadingSpinner from "../../components/LoadingSpinner";
+import AdvancedSearch from "../../components/AdvancedSearch";
 
 const AllArtifacts = () => {
   const [artifacts, setArtifacts] = useState([]);
@@ -42,6 +44,10 @@ const AllArtifacts = () => {
 
     return () => controller.abort();
   }, [query, sortBy, page, pageSize]);
+
+  useEffect(() => {
+    applyFilters();
+  }, [artifacts, filters]);
 
   const handleSearch = (e) => {
     e.preventDefault();
