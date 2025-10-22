@@ -34,10 +34,10 @@ const FeaturedArtifactsSection = () => {
       <div className="max-w-7xl mx-auto">
 
         <div className="text-center mb-14">
-          <h2 className="text-4xl md:text-5xl font-bold text-base-content mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-[#5d4634] dark:text-[#d4a017] mb-4">
             Featured Artifacts
           </h2>
-          <p className="opacity-80 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-700 dark:text-gray-300 text-lg max-w-2xl mx-auto">
             Discover the most admired historical treasures, loved by the community.
           </p>
         </div>
@@ -57,7 +57,7 @@ const FeaturedArtifactsSection = () => {
             </div>
           </>
         ) : (
-          <p className="text-center opacity-70">No featured artifacts found.</p>
+          <p className="text-center text-gray-600 dark:text-gray-400">No featured artifacts found.</p>
         )}
       </div>
     </section>

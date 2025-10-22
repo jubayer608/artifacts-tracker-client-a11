@@ -40,10 +40,10 @@ const StatsSection = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-[#fdf6e3] mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-[#fdf6e3] dark:text-[#d4a017] mb-4">
             Our Impact in Numbers
           </h2>
-          <p className="text-[#e5ddca] text-lg max-w-2xl mx-auto">
+          <p className="text-[#e5ddca] dark:text-[#f5d680] text-lg max-w-2xl mx-auto">
             Discover the scale of our community's contribution to preserving and documenting historical artifacts worldwide.
           </p>
         </motion.div>
@@ -58,8 +58,8 @@ const StatsSection = () => {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               className="text-center"
             >
-              <div className="bg-[#fdf6e3] rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 group">
-                <div className="text-[#5d4634] mb-4 flex justify-center group-hover:scale-110 transition-transform duration-300">
+              <div className="bg-[#fdf6e3] dark:bg-[#2d2d2d] rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 group">
+                <div className="text-[#5d4634] dark:text-[#d4a017] mb-4 flex justify-center group-hover:scale-110 transition-transform duration-300">
                   {stat.icon}
                 </div>
                 <motion.div
@@ -67,14 +67,14 @@ const StatsSection = () => {
                   whileInView={{ scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.8, delay: index * 0.1 + 0.3 }}
-                  className="text-4xl md:text-5xl font-bold text-[#5d4634] mb-2"
+                  className="text-4xl md:text-5xl font-bold text-[#5d4634] dark:text-[#d4a017] mb-2"
                 >
                   {stat.number}
                 </motion.div>
-                <h3 className="text-xl font-bold text-[#5d4634] mb-2">
+                <h3 className="text-xl font-bold text-[#5d4634] dark:text-[#d4a017] mb-2">
                   {stat.label}
                 </h3>
-                <p className="text-gray-600 text-sm">
+                <p className="text-gray-600 dark:text-gray-300 text-sm">
                   {stat.description}
                 </p>
               </div>
@@ -89,11 +89,11 @@ const StatsSection = () => {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="text-center mt-16"
         >
-          <div className="bg-[#fdf6e3] rounded-2xl p-8 max-w-4xl mx-auto">
-            <h3 className="text-2xl font-bold text-[#5d4634] mb-4">
+          <div className="bg-[#fdf6e3] dark:bg-[#2d2d2d] rounded-2xl p-8 max-w-4xl mx-auto">
+            <h3 className="text-2xl font-bold text-[#5d4634] dark:text-[#d4a017] mb-4">
               Be Part of Our Growing Community
             </h3>
-            <p className="text-gray-700 text-lg mb-6">
+            <p className="text-gray-700 dark:text-gray-300 text-lg mb-6">
               Join thousands of professionals and enthusiasts who are making history accessible to everyone.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
