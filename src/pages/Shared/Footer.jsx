@@ -35,13 +35,13 @@ const Footer = () => {
               </a>
             </li>
             <li>
-              <a href="/add-artifact" className="hover:underline">
-                Add Artifact
+              <a href="/about" className="hover:underline">
+                About
               </a>
             </li>
             <li>
-              <a href="/my-artifacts" className="hover:underline">
-                My Artifacts
+              <a href="/newsletter" className="hover:underline">
+                Newsletter
               </a>
             </li>
           </ul>

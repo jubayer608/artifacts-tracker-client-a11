@@ -2,7 +2,8 @@ import BannerSlider from "./BannerSlider";
 import ArtifactJourney from "./ArtifactJourney";
 import FeaturedArtifactsSection from "./FeaturedArtifactsSection";
 import RestorerSpotlight from "./RestorerSpotlight";
-import Newsletter from "./Newsletter";
+import RecentlyViewed from "./RecentlyViewed";
+import Reviews from "./Reviews";
 
 const Home = () => {
   return (
@@ -21,7 +22,8 @@ const Home = () => {
       <div className="m-4 md:m-10 w-full mx-auto">
         <RestorerSpotlight></RestorerSpotlight>
       </div>
-      <Newsletter />
+      <RecentlyViewed />
+      <Reviews />
     </div>
   );
 };

@@ -4,34 +4,46 @@ import LoadingSpinner from "../../components/LoadingSpinner";
 import AdvancedSearch from "../../components/AdvancedSearch";
 
 const AllArtifacts = () => {
-  const [allArtifacts, setAllArtifacts] = useState([]);
+  const [artifacts, setArtifacts] = useState([]);
+  const [serverPagination, setServerPagination] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [query, setQuery] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [sort, setSort] = useState("likes_desc"); // likes_desc | likes_asc | name_asc | name_desc
-  const [typeFilter, setTypeFilter] = useState("all");
+  const [sortBy, setSortBy] = useState("name-asc");
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(9);
+  const [total, setTotal] = useState(0);
 
   useEffect(() => {
-    let isMounted = true;
-    const load = async () => {
-      setLoading(true);
-      try {
-        const res = await fetch(`https://artifacts-tracker-server-one.vercel.app/artifacts?search=${encodeURIComponent(query)}`);
-        const data = await res.json();
-        if (isMounted) setAllArtifacts(Array.isArray(data) ? data : []);
-      } catch (_) {
-        if (isMounted) setAllArtifacts([]);
-      } finally {
-        if (isMounted) setLoading(false);
-      }
-    };
-    load();
-    return () => {
-      isMounted = false;
-    };
-  }, [query]);
+    const controller = new AbortController();
+    const [field, direction] = sortBy.split("-");
+    setLoading(true);
+    fetch(
+      `https://artifacts-tracker-server-one.vercel.app/artifacts?search=${encodeURIComponent(
+        query
+      )}&sort=${field}&order=${direction}&page=${page}&limit=${pageSize}`,
+      { signal: controller.signal }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data)) {
+          // Fallback if API returns plain array
+          setServerPagination(false);
+          setArtifacts(data);
+          setTotal(data.length);
+        } else {
+          setServerPagination(true);
+          setArtifacts(data.items || []);
+          setTotal(data.total || 0);
+        }
+      })
+      .catch(() => {
+        setArtifacts([]);
+      })
+      .finally(() => setLoading(false));
+
+    return () => controller.abort();
+  }, [query, sortBy, page, pageSize]);
 
   useEffect(() => {
     applyFilters();
@@ -43,83 +55,117 @@ const AllArtifacts = () => {
     setQuery(search.trim());
   };
 
-  const filteredSorted = useMemo(() => {
-    let list = [...allArtifacts];
-    if (typeFilter !== "all") {
-      list = list.filter((a) => (a.type || "").toLowerCase() === typeFilter);
-    }
-    if (sort === "likes_desc") {
-      list.sort((a, b) => (b.likeCount || 0) - (a.likeCount || 0));
-    } else if (sort === "likes_asc") {
-      list.sort((a, b) => (a.likeCount || 0) - (b.likeCount || 0));
-    } else if (sort === "name_asc") {
-      list.sort((a, b) => (a.name || "").localeCompare(b.name || ""));
-    } else if (sort === "name_desc") {
-      list.sort((a, b) => (b.name || "").localeCompare(a.name || ""));
-    }
-    return list;
-  }, [allArtifacts, typeFilter, sort]);
+  const totalPages = useMemo(() => Math.max(1, Math.ceil(total / pageSize)), [total, pageSize]);
 
-  const total = filteredSorted.length;
-  const totalPages = Math.max(1, Math.ceil(total / pageSize));
-  const currentPage = Math.min(page, totalPages);
-  const start = (currentPage - 1) * pageSize;
-  const end = start + pageSize;
-  const pageItems = filteredSorted.slice(start, end);
+  const displayedArtifacts = useMemo(() => {
+    if (serverPagination) return artifacts;
+    const [field, direction] = sortBy.split("-");
+    const sorted = [...artifacts].sort((a, b) => {
+      const va = (a?.[field] ?? "").toString().toLowerCase();
+      const vb = (b?.[field] ?? "").toString().toLowerCase();
+      if (field === "likeCount") {
+        return (Number(a.likeCount || 0) - Number(b.likeCount || 0)) * (direction === "asc" ? 1 : -1);
+      }
+      if (field === "createdAt") {
+        return va.localeCompare(vb) * (direction === "asc" ? 1 : -1);
+      }
+      return va.localeCompare(vb) * (direction === "asc" ? 1 : -1);
+    });
+    const start = (page - 1) * pageSize;
+    return sorted.slice(start, start + pageSize);
+  }, [artifacts, serverPagination, sortBy, page, pageSize]);
 
   return (
-    <div className="bg-base-100 py-16 px-6 md:px-20 font-serif min-h-screen">
-      <h1 className="text-4xl text-base-content font-bold mb-8 text-center">All Artifacts</h1>
+    <div className="bg-[#fdf6e3] dark:bg-slate-900 py-16 px-6 md:px-20 font-serif min-h-screen">
+      <h1 className="text-4xl text-[#5d4634] dark:text-[#e5ddca] font-bold mb-8 text-center">
+        All Artifacts
+      </h1>
 
-      <div className="max-w-7xl mx-auto">
-        <form onSubmit={handleSearch} className="mb-6 grid grid-cols-1 md:grid-cols-[1fr_auto_auto_auto] gap-3 items-center">
-          <input
-            type="text"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search by artifact name..."
-            className="input input-bordered w-full"
-          />
-          <select value={typeFilter} onChange={(e) => { setTypeFilter(e.target.value); setPage(1); }} className="select select-bordered">
-            <option value="all">All Types</option>
-            <option value="tools">Tools</option>
-            <option value="weapons">Weapons</option>
-            <option value="documents">Documents</option>
-            <option value="writings">Writings</option>
+      <form
+        onSubmit={handleSearch}
+        className="mb-6 max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-[1fr_auto_auto] gap-3"
+      >
+        <input
+          type="text"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="Search by artifact name..."
+          className="w-full px-4 py-2 rounded-lg border border-[#c8b8a5] focus:outline-none focus:ring-2 focus:ring-[#5d4634] bg-white dark:bg-slate-800 dark:text-gray-100"
+        />
+        <button
+          type="submit"
+          className="bg-[#5d4634] text-[#fdf6e3] px-5 py-2 rounded-lg hover:bg-[#4b3727] transition"
+        >
+          Search
+        </button>
+        <select
+          value={sortBy}
+          onChange={(e) => {
+            setPage(1);
+            setSortBy(e.target.value);
+          }}
+          className="px-3 py-2 rounded-lg border border-[#c8b8a5] bg-white dark:bg-slate-800 dark:text-gray-100"
+          aria-label="Sort artifacts"
+        >
+          <option value="name-asc">Name A-Z</option>
+          <option value="name-desc">Name Z-A</option>
+          <option value="createdAt-asc">Oldest First</option>
+          <option value="createdAt-desc">Newest First</option>
+          <option value="likeCount-desc">Most Liked</option>
+        </select>
+      </form>
+
+      {loading ? (
+        <div className="flex justify-center items-center py-20">
+          <span className="loading loading-spinner loading-lg text-warning"></span>
+        </div>
+      ) : (
+        <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
+          {(displayedArtifacts.length > 0) ? (
+            displayedArtifacts.map((artifact) => (
+              <ArtifactCard key={artifact._id} artifact={artifact} />
+            ))
+          ) : (
+            <p className="text-center text-gray-600 dark:text-gray-300 col-span-full">
+              No artifacts found.
+            </p>
+          )}
+        </div>
+      )}
+
+      <div className="max-w-7xl mx-auto mt-8 flex flex-col md:flex-row items-center justify-between gap-3">
+        <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
+          <span>
+            Page {page} of {totalPages}
+          </span>
+          <select
+            value={pageSize}
+            onChange={(e) => {
+              setPage(1);
+              setPageSize(Number(e.target.value));
+            }}
+            className="px-2 py-1 rounded border border-[#c8b8a5] bg-white dark:bg-slate-800 dark:text-gray-100"
+          >
+            <option value={6}>6</option>
+            <option value={9}>9</option>
+            <option value={12}>12</option>
           </select>
-          <select value={sort} onChange={(e) => setSort(e.target.value)} className="select select-bordered">
-            <option value="likes_desc">Most Liked</option>
-            <option value="likes_asc">Least Liked</option>
-            <option value="name_asc">Name A-Z</option>
-            <option value="name_desc">Name Z-A</option>
-          </select>
-          <button type="submit" className="btn btn-primary">Search</button>
-        </form>
-
-        {loading ? (
-          <div className="py-16 flex justify-center"><span className="loading loading-spinner loading-lg" aria-label="Loading" /></div>
-        ) : pageItems.length > 0 ? (
-          <>
-            <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-              {pageItems.map((artifact) => (
-                <ArtifactCard key={artifact._id} artifact={artifact} />
-              ))}
-            </div>
-
-            <div className="mt-8 flex items-center justify-between">
-              <div className="text-sm opacity-70">Showing {start + 1}-{Math.min(end, total)} of {total}</div>
-              <div className="join">
-                <button className="btn join-item" disabled={currentPage === 1} onClick={() => setPage((p) => Math.max(1, p - 1))}>Prev</button>
-                {Array.from({ length: totalPages }, (_, i) => i + 1).slice(Math.max(0, currentPage - 3), Math.max(0, currentPage - 3) + 5).map((p) => (
-                  <button key={p} className={`btn join-item ${p === currentPage ? 'btn-active' : ''}`} onClick={() => setPage(p)}>{p}</button>
-                ))}
-                <button className="btn join-item" disabled={currentPage === totalPages} onClick={() => setPage((p) => Math.min(totalPages, p + 1))}>Next</button>
-              </div>
-            </div>
-          </>
-        ) : (
-          <p className="text-center opacity-70 py-10">No artifacts found.</p>
-        )}
+          <span>per page</span>
+        </div>
+        <div className="join">
+          <button className="join-item btn" onClick={() => setPage(1)} disabled={page === 1}>
+            « First
+          </button>
+          <button className="join-item btn" onClick={() => setPage((p) => Math.max(1, p - 1))} disabled={page === 1}>
+            ‹ Prev
+          </button>
+          <button className="join-item btn" onClick={() => setPage((p) => Math.min(totalPages, p + 1))} disabled={page === totalPages}>
+            Next ›
+          </button>
+          <button className="join-item btn" onClick={() => setPage(totalPages)} disabled={page === totalPages}>
+            Last »
+          </button>
+        </div>
       </div>
     </div>
   );

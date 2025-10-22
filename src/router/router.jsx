@@ -17,6 +17,8 @@ import ArtifactComparison from "../pages/Comparison/ArtifactComparison";
 import ArtifactTimeline from "../pages/Timeline/ArtifactTimeline";
 import AboutPage from "../pages/About/AboutPage";
 import NotFound from "../routes/NotFound";
+import About from "../pages/Static/About";
+import Newsletter from "../pages/Static/Newsletter";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +28,14 @@ const router = createBrowserRouter([
         {
             index:true,
             Component:Home
+        },
+        {
+          path:"/about",
+          Component:About
+        },
+        {
+          path:"/newsletter",
+          Component:Newsletter
         },
         {
           path:"/artifacts",

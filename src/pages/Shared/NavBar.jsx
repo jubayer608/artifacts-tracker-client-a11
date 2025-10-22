@@ -1,13 +1,12 @@
 import { useContext } from "react";
 import { Link, NavLink } from "react-router";
 import { AuthContext } from "../../contexts/AuthContext/AuthContext";
-import { FiLogOut, FiHeart, FiFolder } from "react-icons/fi";
-import { useTheme } from "../../contexts/ThemeContext";
-import { BsSun, BsMoon, BsCircleHalf } from "react-icons/bs";
+import { ThemeContext } from "../../contexts/ThemeContext/ThemeContext";
+import { FiLogOut, FiHeart, FiFolder, FiSun, FiMoon } from "react-icons/fi";
 
 const NavBar = () => {
   const { user, signOutUser } = useContext(AuthContext);
-  const { theme, resolvedTheme, setTheme } = useTheme();
+  const { theme, toggleTheme } = useContext(ThemeContext);
 
   const handleSignOut = () => {
     signOutUser()
@@ -31,15 +30,17 @@ const NavBar = () => {
           All Artifacts
         </NavLink>
       </li>
-      {!user ? (
-        <>
-          <li>
-            <NavLink to="/register" className="font-display text-base">
-              Register
-            </NavLink>
-          </li>
-        </>
-      ) : (
+      <li>
+        <NavLink to="/about" className="font-display text-base">
+          About
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="/newsletter" className="font-display text-base">
+          Newsletter
+        </NavLink>
+      </li>
+      {user && (
         <>
           <li>
             <NavLink to="/add-artifact" className="font-display text-base">
@@ -53,7 +54,7 @@ const NavBar = () => {
           </li>
           <li>
             <NavLink to="/liked-artifacts" className="font-display text-base">
-              Liked
+              Liked Artifacts
             </NavLink>
           </li>
         </>
@@ -62,7 +63,7 @@ const NavBar = () => {
   );
 
   return (
-    <div className="bg-base-100 text-base-content font-serif shadow-md sticky top-0 z-50">
+    <div className="bg-[#fdf6e3] dark:bg-slate-900 text-gray-800 dark:text-gray-100 font-serif shadow-md sticky top-0 z-50">
       <div className="navbar max-w-7xl mx-auto px-4">
       <div className="navbar-start">
         <div className="dropdown">
@@ -77,13 +78,20 @@ const NavBar = () => {
               {user ? privateNavLinks : publicNavLinks}
             </ul>
           </div>
-          <Link
-            to="/"
-            className="btn btn-ghost normal-case text-xl font-display text-[#5d4634] hover:bg-transparent"
+          <ul
+            tabIndex={0}
+            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 dark:bg-slate-800 rounded-box w-60"
           >
             🏺 Artifacts Tracker
           </Link>
         </div>
+        <Link
+          to="/"
+          className="btn btn-ghost normal-case text-xl font-display text-[#5d4634] dark:text-[#e5ddca]"
+        >
+          🏺 Artifacts Tracker
+        </Link>
+      </div>
 
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 gap-2">
@@ -91,30 +99,14 @@ const NavBar = () => {
           </ul>
         </div>
 
-      <div className="navbar-end">
-        <div className="mr-2 dropdown dropdown-end">
-          <div tabIndex={0} role="button" className="btn btn-ghost">
-            {resolvedTheme === "dark" ? <BsMoon /> : <BsSun />}
-            <span className="hidden md:inline text-sm">Theme</span>
-          </div>
-          <ul tabIndex={0} className="menu dropdown-content bg-base-100 rounded-box z-[1] w-40 p-2 shadow">
-            <li>
-              <button onClick={() => setTheme("light")} className={theme === "light" ? "active" : ""}>
-                <BsSun /> Light
-              </button>
-            </li>
-            <li>
-              <button onClick={() => setTheme("dark")} className={theme === "dark" ? "active" : ""}>
-                <BsMoon /> Dark
-              </button>
-            </li>
-            <li>
-              <button onClick={() => setTheme("system")} className={theme === "system" ? "active" : ""}>
-                <BsCircleHalf /> System
-              </button>
-            </li>
-          </ul>
-        </div>
+      <div className="navbar-end gap-2">
+        <button
+          onClick={toggleTheme}
+          aria-label="Toggle theme"
+          className="btn btn-ghost btn-circle"
+        >
+          {theme === "dark" ? <FiSun /> : <FiMoon />}
+        </button>
         {!user ? (
           <Link
             to="/signIn"
@@ -129,7 +121,7 @@ const NavBar = () => {
               role="button"
               className="btn btn-ghost btn-circle avatar"
             >
-              <div className="w-10 rounded-full ring ring-[#5d4634] ring-offset-2">
+              <div className="w-10 rounded-full ring ring-[#5d4634] ring-offset-2 ring-offset-[#fdf6e3] dark:ring-offset-slate-900">
                 <img
                   alt="User Profile"
                   src={user.photoURL || "/default-avatar.png"}
@@ -138,10 +130,10 @@ const NavBar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-3 shadow bg-base-100 rounded-box w-60"
+              className="menu menu-sm dropdown-content mt-3 z-[1] p-3 shadow bg-base-100 dark:bg-slate-800 rounded-box w-60"
             >
               <li className="mb-2">
-                <span className="text-sm text-gray-600 font-medium">
+                <span className="text-sm text-gray-600 dark:text-gray-300 font-medium">
                   {user.displayName}
                 </span>
               </li>
@@ -207,6 +199,7 @@ const NavBar = () => {
             )}
           </div>
         </div>
+      </div>
       </div>
       </div>
     </div>

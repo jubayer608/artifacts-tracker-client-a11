@@ -9,13 +9,13 @@ const PrivateRoute = ({ children }) => {
   if (loading) {
     return (
       <div className="min-h-[40vh] flex items-center justify-center">
-        <span className="loading loading-ring loading-lg" aria-label="Loading" />
+        <span className="loading loading-ring loading-lg"></span>
       </div>
     );
   }
 
   if (!user) {
-    return <Navigate to="/signIn" state={location.pathname}></Navigate>;
+    return <Navigate to="/signIn" state={{ from: location }} replace />;
   }
 
   return children;
