@@ -12,6 +12,10 @@ import AddArtifact from "../pages/ArtifactCrud/AddArtifact";
 import LikedArtifacts from "../pages/ArtifactCrud/LikedArtifacts";
 import MyArtifactsPage from "../pages/ArtifactCrud/MyArtifactsPage";
 import UpdateArtifact from "../pages/ArtifactCrud/UpdateArtifact";
+import CollectionsPage from "../pages/Collections/CollectionsPage";
+import ArtifactComparison from "../pages/Comparison/ArtifactComparison";
+import ArtifactTimeline from "../pages/Timeline/ArtifactTimeline";
+import AboutPage from "../pages/About/AboutPage";
 import NotFound from "../routes/NotFound";
 
 const router = createBrowserRouter([
@@ -46,6 +50,22 @@ const router = createBrowserRouter([
         {
           path:"/my-artifacts",
           element:<PrivateRoute><MyArtifactsPage></MyArtifactsPage></PrivateRoute>
+        },
+        {
+          path:"/collections",
+          element:<PrivateRoute><CollectionsPage></CollectionsPage></PrivateRoute>
+        },
+        {
+          path:"/comparison",
+          element:<PrivateRoute><ArtifactComparison></ArtifactComparison></PrivateRoute>
+        },
+        {
+          path:"/timeline/:id",
+          element:<PrivateRoute><ArtifactTimeline></ArtifactTimeline></PrivateRoute>
+        },
+        {
+          path:"/about",
+          Component:AboutPage
         },
         {
            path:"/update-artifact/:id",
