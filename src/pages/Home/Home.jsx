@@ -8,39 +8,29 @@ import StatsSection from "./StatsSection";
 
 const Home = () => {
   return (
-    <div className="bg-base-100 dark:bg-gray-900">
+    <div className="bg-white">
       {/* Hero Section */}
-      <div className="px-6 md:px-10 pt-10">
+      <div className="max-w-7xl mx-auto px-6 md:px-10 pt-10">
         <BannerSlider></BannerSlider>
       </div>
       
       {/* Featured Artifacts Section */}
-      <div className="w-full">
-        <FeaturedArtifactsSection></FeaturedArtifactsSection>
-      </div>
+      <FeaturedArtifactsSection></FeaturedArtifactsSection>
       
       {/* Statistics Section */}
-      <div className="w-full">
-        <StatsSection></StatsSection>
-      </div>
+      <StatsSection></StatsSection>
       
       {/* Artifact Journey Section */}
-      <div className="w-full">
-        <ArtifactJourney></ArtifactJourney>
-      </div>
+      <ArtifactJourney></ArtifactJourney>
       
       {/* Restorer Spotlight Section */}
       <RestorerSpotlight></RestorerSpotlight>
       
       {/* Reviews Section */}
-      <div className="w-full">
-        <ReviewsSection></ReviewsSection>
-      </div>
+      <ReviewsSection></ReviewsSection>
       
       {/* Newsletter Section */}
-      <div className="w-full">
-        <NewsletterSection></NewsletterSection>
-      </div>
+      <NewsletterSection></NewsletterSection>
     </div>
   );
 };

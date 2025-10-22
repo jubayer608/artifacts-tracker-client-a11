@@ -7,7 +7,6 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
-  darkMode: 'class',
   theme: {
     extend: {
       fontFamily: {
@@ -43,35 +42,6 @@ export default {
   },
   plugins: [daisyui],
   daisyui: {
-    themes: [
-      {
-        light: {
-          "primary": "#5d4634",
-          "secondary": "#fdf6e3",
-          "accent": "#4b3727",
-          "neutral": "#3d4451",
-          "base-100": "#ffffff",
-          "base-200": "#f9fafb",
-          "base-300": "#f3f4f6",
-          "info": "#3abff8",
-          "success": "#36d399",
-          "warning": "#fbbd23",
-          "error": "#f87272",
-        },
-        dark: {
-          "primary": "#d4a017",
-          "secondary": "#1a1a1a",
-          "accent": "#f5d680",
-          "neutral": "#2a2a2a",
-          "base-100": "#0d1117",
-          "base-200": "#161b22",
-          "base-300": "#21262d",
-          "info": "#3abff8",
-          "success": "#36d399",
-          "warning": "#fbbd23",
-          "error": "#f87272",
-        }
-      }
-    ],
+    themes: ["light"],
   },
 };

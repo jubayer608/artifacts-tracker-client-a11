@@ -8,7 +8,7 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="bg-base-200 text-base-content font-serif mt-16">
+    <footer className="bg-[#2d2416] text-[#fdf6e3] font-serif mt-16">
       <div className="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
         <div>
           <h2 className="text-xl font-bold mb-3 tracking-wide">
@@ -55,25 +55,25 @@ const Footer = () => {
           <div className="flex space-x-4">
             <a
               href="#"
-              className="text-base-content hover:opacity-80 text-xl"
+              className="text-[#d4a017] hover:text-[#fdf6e3] text-xl transition-colors"
             >
               <FaFacebookF />
             </a>
             <a
               href="#"
-              className="text-base-content hover:opacity-80 text-xl"
+              className="text-[#d4a017] hover:text-[#fdf6e3] text-xl transition-colors"
             >
               <FaTwitter />
             </a>
             <a
               href="#"
-              className="text-base-content hover:opacity-80 text-xl"
+              className="text-[#d4a017] hover:text-[#fdf6e3] text-xl transition-colors"
             >
               <FaInstagram />
             </a>
             <a
               href="mailto:support@artifactstracker.com"
-              className="text-base-content hover:opacity-80 text-xl"
+              className="text-[#d4a017] hover:text-[#fdf6e3] text-xl transition-colors"
             >
               <FaEnvelope />
             </a>
@@ -81,7 +81,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="text-center border-t border-base-300 text-sm py-4 mt-6">
+      <div className="text-center border-t border-[#5d4634] text-sm py-4 mt-6">
         © {new Date().getFullYear()} Artifacts Tracker. All rights reserved.
       </div>
     </footer>

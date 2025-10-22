@@ -1,20 +1,16 @@
 import { useContext } from "react";
 import { Link, NavLink } from "react-router";
 import { AuthContext } from "../../contexts/AuthContext/AuthContext";
-import { useTheme } from "../../contexts/ThemeContext/ThemeProvider";
 import {
   FiLogOut,
   FiHeart,
   FiFolder,
   FiSearch,
   FiUser,
-  FiSun,
-  FiMoon,
 } from "react-icons/fi";
 
 const NavBar = () => {
   const { user, signOutUser } = useContext(AuthContext);
-  const { theme, toggleTheme, isDark } = useTheme();
 
   const handleSignOut = () => {
     signOutUser()
@@ -29,8 +25,8 @@ const NavBar = () => {
   const navLinkClass = ({ isActive }) =>
     `font-display text-base transition-colors duration-200 ${
       isActive
-        ? "text-primary font-semibold border-b-2 border-primary pb-1"
-        : "hover:text-primary"
+        ? "text-[#5d4634] font-semibold border-b-2 border-[#5d4634] pb-1"
+        : "text-gray-700 hover:text-[#5d4634]"
     }`;
 
   const publicNavLinks = (
@@ -71,14 +67,14 @@ const NavBar = () => {
   );
 
   return (
-    <nav className="w-full bg-base-100 text-base-content font-serif shadow-lg sticky top-0 z-50 border-b border-base-300">
+    <nav className="w-full bg-white text-gray-800 font-serif shadow-lg sticky top-0 z-50 border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link
               to="/"
-              className="flex items-center space-x-2 text-xl font-display text-primary hover:text-primary/80 transition-colors duration-200"
+              className="flex items-center space-x-2 text-xl font-display text-[#5d4634] hover:text-[#4b3727] transition-colors duration-200"
             >
               <span className="text-2xl">🏺</span>
               <span className="font-bold">Artifacts Tracker</span>
@@ -92,30 +88,18 @@ const NavBar = () => {
 
           {/* User Actions */}
           <div className="flex items-center space-x-4">
-            {/* Theme Toggle */}
-            <button
-              onClick={toggleTheme}
-              className="btn btn-ghost btn-sm text-primary hover:bg-base-200 transition-all duration-200"
-              title={`Switch to ${isDark ? "light" : "dark"} mode`}
-            >
-              {isDark ? (
-                <FiSun className="w-4 h-4" />
-              ) : (
-                <FiMoon className="w-4 h-4" />
-              )}
-            </button>
 
             {!user ? (
               <div className="flex items-center space-x-3">
                 <Link
                   to="/signIn"
-                  className="btn btn-outline btn-sm font-display border-primary text-primary hover:bg-primary hover:text-primary-content transition-all duration-200"
+                  className="btn btn-outline btn-sm font-display border-[#5d4634] text-[#5d4634] hover:bg-[#5d4634] hover:text-[#fdf6e3] transition-all duration-200"
                 >
                   Sign In
                 </Link>
                 <Link
                   to="/register"
-                  className="btn btn-sm font-display bg-primary text-primary-content hover:bg-primary/90 transition-all duration-200"
+                  className="btn btn-sm font-display bg-[#5d4634] text-[#fdf6e3] hover:bg-[#4b3727] transition-all duration-200"
                 >
                   Register
                 </Link>
@@ -124,7 +108,7 @@ const NavBar = () => {
               <div className="flex items-center space-x-3">
                 <Link
                   to="/search"
-                  className="btn btn-ghost btn-sm text-primary hover:bg-base-200 transition-all duration-200"
+                  className="btn btn-ghost btn-sm text-[#5d4634] hover:bg-[#fdf6e3] transition-all duration-200"
                 >
                   <FiSearch className="w-4 h-4" />
                 </Link>
@@ -144,12 +128,12 @@ const NavBar = () => {
                   </div>
                   <ul
                     tabIndex={0}
-                    className="menu menu-sm dropdown-content mt-3 z-[1] p-3 shadow-lg bg-base-100 rounded-box w-64 border border-base-300"
+                    className="menu menu-sm dropdown-content mt-3 z-[1] p-3 shadow-lg bg-white rounded-box w-64 border border-gray-200"
                   >
-                    <li className="mb-3 pb-2 border-b border-base-300">
+                    <li className="mb-3 pb-2 border-b border-gray-200">
                       <div className="flex items-center space-x-2">
-                        <FiUser className="w-4 h-4 text-primary" />
-                        <span className="text-sm font-medium text-base-content">
+                        <FiUser className="w-4 h-4 text-[#5d4634]" />
+                        <span className="text-sm font-medium text-gray-800">
                           {user.displayName || user.email}
                         </span>
                       </div>
@@ -157,7 +141,7 @@ const NavBar = () => {
                     <li>
                       <Link
                         to="/my-artifacts"
-                        className="flex items-center gap-2 hover:bg-base-200 rounded-md p-2"
+                        className="flex items-center gap-2 hover:bg-[#fdf6e3] rounded-md p-2"
                       >
                         <FiFolder className="w-4 h-4" /> My Artifacts
                       </Link>
@@ -165,12 +149,12 @@ const NavBar = () => {
                     <li>
                       <Link
                         to="/liked-artifacts"
-                        className="flex items-center gap-2 hover:bg-base-200 rounded-md p-2"
+                        className="flex items-center gap-2 hover:bg-[#fdf6e3] rounded-md p-2"
                       >
                         <FiHeart className="w-4 h-4" /> Favorites
                       </Link>
                     </li>
-                    <li className="pt-2 border-t border-base-300">
+                    <li className="pt-2 border-t border-gray-200">
                       <button
                         onClick={handleSignOut}
                         className="flex items-center gap-2 text-error hover:bg-error/10 rounded-md p-2 w-full text-left"
@@ -206,10 +190,10 @@ const NavBar = () => {
                     />
                   </svg>
                 </div>
-                <ul
-                  tabIndex={0}
-                  className="menu menu-sm dropdown-content mt-3 z-[1] p-3 shadow-lg bg-base-100 rounded-box w-52 border border-base-300 list-none"
-                >
+                  <ul
+                    tabIndex={0}
+                    className="menu menu-sm dropdown-content mt-3 z-[1] p-3 shadow-lg bg-white rounded-box w-52 border border-gray-200 list-none"
+                  >
                   {user ? protectedNavLinks : publicNavLinks}
                 </ul>
               </div>

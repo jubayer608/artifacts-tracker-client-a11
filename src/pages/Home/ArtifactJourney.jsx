@@ -31,20 +31,20 @@ const timeline = [
 
 const ArtifactJourney = () => {
   return (
-    <section className="bg-base-200 dark:bg-gray-800 py-20 px-6 md:px-20 font-serif">
-      <div className="max-w-6xl mx-auto text-center mb-12">
-        <h2 className="text-4xl md:text-5xl font-bold text-base-content dark:text-gray-100 mb-4">
+    <section className="bg-white py-20 px-6 md:px-20 font-serif">
+      <div className="max-w-7xl mx-auto text-center mb-12">
+        <h2 className="text-4xl md:text-5xl font-bold text-[#5d4634] mb-4">
           Journey of a Historical Artifact
         </h2>
-        <p className="text-base-content/70 dark:text-gray-300 text-lg max-w-2xl mx-auto">
+        <p className="text-gray-700 text-lg max-w-2xl mx-auto">
           Follow the timeline of how an ancient artifact moves from excavation to exhibition.
         </p>
       </div>
-      <div className="max-w-4xl mx-auto grid gap-10 md:grid-cols-2">
+      <div className="max-w-7xl mx-auto grid gap-10 md:grid-cols-2">
         {timeline.map((step, idx) => (
           <motion.div
             key={idx}
-            className="p-6 bg-base-100 dark:bg-gray-700 border-l-4 border-primary rounded-lg shadow-md hover:shadow-lg transition duration-300"
+            className="p-6 bg-[#fdf6e3] border-l-4 border-[#d4a017] rounded-lg shadow-md hover:shadow-lg transition duration-300"
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -52,8 +52,8 @@ const ArtifactJourney = () => {
           >
             <div className="flex flex-col items-start text-left">
               {step.icon}
-              <h3 className="text-xl font-bold text-base-content dark:text-gray-100 mb-1">{step.title}</h3>
-              <p className="text-base-content/70 dark:text-gray-300 text-sm">{step.description}</p>
+              <h3 className="text-xl font-bold text-[#5d4634] mb-1">{step.title}</h3>
+              <p className="text-gray-700 text-sm">{step.description}</p>
             </div>
           </motion.div>
         ))}
