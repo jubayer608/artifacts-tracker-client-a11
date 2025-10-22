@@ -9,7 +9,6 @@ const AllArtifacts = () => {
   const [search, setSearch] = useState("");
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
-<<<<<<< HEAD
   const [sortBy, setSortBy] = useState("name");
   const [sortOrder, setSortOrder] = useState("asc");
   const [filters, setFilters] = useState({});
@@ -28,33 +27,6 @@ const AllArtifacts = () => {
         setFilteredArtifacts([]);
         setLoading(false);
       });
-=======
-  const [error, setError] = useState("");
-
-  useEffect(() => {
-    const fetchArtifacts = async () => {
-      setLoading(true);
-      setError("");
-      try {
-        const res = await fetch(
-          `https://artifacts-tracker-server-one.vercel.app/artifacts?search=${query}`
-        );
-        if (!res.ok) {
-          throw new Error(`Server Error: ${res.status}`);
-        }
-        const data = await res.json();
-        setArtifacts(data);
-      } catch (err) {
-        console.error("Fetch error:", err.message);
-        setArtifacts([]);
-        setError("Failed to load artifacts. Please try again later.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchArtifacts();
->>>>>>> 9ffdaac (changes code)
   }, [query]);
 
   useEffect(() => {
@@ -169,7 +141,6 @@ const AllArtifacts = () => {
             </button>
           </form>
 
-<<<<<<< HEAD
           <AdvancedSearch 
             onFilter={handleFilter}
             loading={loading}
@@ -218,21 +189,6 @@ const AllArtifacts = () => {
           </div>
         )}
       </div>
-=======
-      {loading ? (
-        <p className="text-center text-gray-500 text-lg">Loading...</p>
-      ) : error ? (
-        <p className="text-center text-red-500">{error}</p>
-      ) : artifacts.length > 0 ? (
-        <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
-          {artifacts.map((artifact) => (
-            <ArtifactCard key={artifact._id} artifact={artifact} />
-          ))}
-        </div>
-      ) : (
-        <p className="text-center text-gray-600">No artifacts found.</p>
-      )}
->>>>>>> 9ffdaac (changes code)
     </div>
   );
 };

@@ -1,11 +1,7 @@
 import React, { useContext, useState } from "react";
 import { FaHeart } from "react-icons/fa";
-<<<<<<< HEAD
 import { FiClock } from "react-icons/fi";
 import { Link } from "react-router";
-=======
-import { Link } from "react-router"; 
->>>>>>> 9ffdaac (changes code)
 import { motion } from "framer-motion";
 import { AuthContext } from "../../contexts/AuthContext/AuthContext";
 
