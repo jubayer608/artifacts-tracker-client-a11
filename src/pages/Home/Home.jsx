@@ -15,22 +15,32 @@ const Home = () => {
       </div>
       
       {/* Featured Artifacts Section */}
-      <FeaturedArtifactsSection></FeaturedArtifactsSection>
+      <div className="w-full">
+        <FeaturedArtifactsSection></FeaturedArtifactsSection>
+      </div>
       
       {/* Statistics Section */}
-      <StatsSection></StatsSection>
+      <div className="w-full">
+        <StatsSection></StatsSection>
+      </div>
       
       {/* Artifact Journey Section */}
-      <ArtifactJourney></ArtifactJourney>
+      <div className="w-full">
+        <ArtifactJourney></ArtifactJourney>
+      </div>
       
       {/* Restorer Spotlight Section */}
       <RestorerSpotlight></RestorerSpotlight>
       
       {/* Reviews Section */}
-      <ReviewsSection></ReviewsSection>
+      <div className="w-full">
+        <ReviewsSection></ReviewsSection>
+      </div>
       
       {/* Newsletter Section */}
-      <NewsletterSection></NewsletterSection>
+      <div className="w-full">
+        <NewsletterSection></NewsletterSection>
+      </div>
     </div>
   );
 };

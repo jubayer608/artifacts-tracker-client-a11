@@ -10,6 +10,7 @@ const ThemeToggle = () => {
       onClick={toggleTheme}
       className="btn btn-ghost btn-circle text-primary hover:bg-primary hover:text-primary-content transition-all duration-300"
       title={`Switch to ${isDark ? 'light' : 'dark'} mode`}
+      aria-label={`Switch to ${isDark ? 'light' : 'dark'} mode`}
     >
       {isDark ? (
         <FiSun className="text-xl" />

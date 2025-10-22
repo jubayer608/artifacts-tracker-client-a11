@@ -53,11 +53,11 @@ const FeaturedArtifactsSection = () => {
             </div>
 
             <div className="mt-12 text-center">
-              <Link to="/artifacts" className="btn btn-primary text-lg">See All Artifacts</Link>
+              <Link to="/artifacts" className="btn bg-[#5d4634] text-[#fdf6e3] hover:bg-[#4b3727] dark:bg-[#8B7355] dark:hover:bg-[#A68B5B] text-lg">See All Artifacts</Link>
             </div>
           </>
         ) : (
-          <p className="text-center opacity-70">No featured artifacts found.</p>
+          <p className="text-center text-gray-600 dark:text-gray-400">No featured artifacts found.</p>
         )}
       </div>
     </section>

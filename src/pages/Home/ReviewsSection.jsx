@@ -117,7 +117,7 @@ const ReviewsSection = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-center mt-12"
         >
-          <div className="bg-[#5d4634] text-[#fdf6e3] rounded-2xl p-8 max-w-4xl mx-auto">
+          <div className="bg-[#5d4634] dark:bg-[#8B7355] text-[#fdf6e3] rounded-2xl p-8 max-w-4xl mx-auto">
             <h3 className="text-2xl font-bold mb-4">Join Our Growing Community</h3>
             <p className="text-lg mb-6">
               Over 10,000+ professionals and enthusiasts trust Artifacts Tracker for their historical research and documentation needs.
