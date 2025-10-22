@@ -6,24 +6,33 @@ import LoadingSpinner from '../../components/LoadingSpinner';
 const FeaturedArtifactsSection = () => {
   const [artifacts, setArtifacts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    fetch('https://artifacts-tracker-server-one.vercel.app/featured-artifacts')
-      .then((res) => res.json())
-      .then((data) => {
+    const fetchFeatured = async () => {
+      try {
+        const res = await fetch('https://artifacts-tracker-server-one.vercel.app/featured-artifacts');
+        if (!res.ok) {
+          throw new Error(`Server error: ${res.status}`);
+        }
+        const data = await res.json();
         setArtifacts(data);
-        setLoading(false);
-      })
-      .catch(() => {
+      } catch (err) {
+        console.error("Error fetching featured artifacts:", err.message);
+        setError("Failed to load featured artifacts.");
         setArtifacts([]);
+      } finally {
         setLoading(false);
-      });
+      }
+    };
+
+    fetchFeatured();
   }, []);
 
   return (
-    <section className="bg-[#fdf6e3] py-20 px-6 md:px-20 font-serif min-h-screen">
+    <section className="bg-[#fdf6e3] py-20 mt-14 px-6 md:px-20 font-serif min-h-screen">
       <div className="max-w-7xl mx-auto">
-        
+
         <div className="text-center mb-14">
           <h2 className="text-4xl md:text-5xl font-bold text-[#5d4634] mb-4">
             Featured Artifacts
@@ -33,9 +42,14 @@ const FeaturedArtifactsSection = () => {
           </p>
         </div>
 
-       
         {loading ? (
+<<<<<<< HEAD
           <LoadingSpinner text="Loading featured artifacts..." />
+=======
+          <p className="text-center text-gray-600">Loading featured artifacts...</p>
+        ) : error ? (
+          <p className="text-center text-red-500">{error}</p>
+>>>>>>> 9ffdaac (changes code)
         ) : artifacts.length > 0 ? (
           <>
             <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
@@ -44,7 +58,6 @@ const FeaturedArtifactsSection = () => {
               ))}
             </div>
 
-          
             <div className="mt-12 text-center">
               <Link to="/artifacts">
                 <button className="bg-[#5d4634] text-[#fdf6e3] px-6 py-3 rounded-lg hover:bg-[#4b3727] transition-all text-lg font-medium">

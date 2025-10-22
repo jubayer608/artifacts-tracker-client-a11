@@ -40,7 +40,7 @@ const slides = [
 
 const BannerSlider = () => {
   return (
-    <section className="w-full max-w-7xl mx-auto mt-6 md:mt-10 rounded-lg overflow-hidden shadow-xl relative group">
+    <section className="w-full  mt-14 md:mt-10 overflow-hidden shadow-xl relative group">
       <Swiper
         modules={[Navigation, Pagination, Autoplay, EffectFade]}
         navigation={{

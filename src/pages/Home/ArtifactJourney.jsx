@@ -31,7 +31,7 @@ const timeline = [
 
 const ArtifactJourney = () => {
   return (
-    <section className="bg-white py-20 px-6 md:px-20 font-serif">
+    <section className="bg-[#fdf6e3] my-14 py-20 px-6 md:px-20 font-serif">
       <div className="max-w-6xl mx-auto text-center mb-12">
         <h2 className="text-4xl md:text-5xl font-bold text-[#5d4634] mb-4">
           Journey of a Historical Artifact

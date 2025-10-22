@@ -1,7 +1,11 @@
 import React, { useContext, useState } from "react";
 import { FaHeart } from "react-icons/fa";
+<<<<<<< HEAD
 import { FiClock } from "react-icons/fi";
 import { Link } from "react-router";
+=======
+import { Link } from "react-router"; 
+>>>>>>> 9ffdaac (changes code)
 import { motion } from "framer-motion";
 import { AuthContext } from "../../contexts/AuthContext/AuthContext";
 
@@ -15,67 +19,72 @@ const ArtifactCard = ({ artifact }) => {
     description,
     likeCount: initialLikeCount = 0,
   } = artifact;
+
   const [liked, setLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(initialLikeCount);
+  const [loading, setLoading] = useState(false);
 
   const { user } = useContext(AuthContext);
 
   const toggleLike = async () => {
-  if (!user?.email) {
-    alert("Please log in to like artifacts.");
-    return;
-  }
-
-  if (!_id) {
-    alert("Invalid artifact ID");
-    return;
-  }
-
-  const newLiked = !liked;
-  setLiked(newLiked);
-  setLikeCount(prev => prev + (newLiked ? 1 : -1));
-
-  try {
-    
-    const res = await fetch(`https://artifacts-tracker-server-one.vercel.app/artifacts/${_id}/like`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${user.accessToken}`,
-      },
-      body: JSON.stringify({ liked: newLiked }),
-    });
-
-    if (!res.ok) {
-      throw new Error("Failed to update like count");
+    if (!user?.email) {
+      alert("Please log in to like artifacts.");
+      return;
     }
 
-    
-    const url = newLiked 
-      ? "https://artifacts-tracker-server-one.vercel.app/liked-artifacts" 
-      : "https://artifacts-tracker-server-one.vercel.app/liked-artifacts/unlike";
-
-    const likeRes = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${user.accessToken}`,
-      },
-      body: JSON.stringify({
-        artifactId: _id,
-        userEmail: user.email,
-      }),
-    });
-
-    if (!likeRes.ok) {
-      throw new Error(newLiked ? "Failed to like artifact" : "Failed to unlike artifact");
+    if (!_id) {
+      alert("Invalid artifact ID");
+      return;
     }
-  } catch (err) {
-    setLiked(!newLiked); 
-    setLikeCount(prev => prev - (newLiked ? 1 : -1));
-    alert(err.message || "Error while updating like status");
-  }
-};
+
+    const newLiked = !liked;
+    setLiked(newLiked);
+    setLikeCount((prev) => prev + (newLiked ? 1 : -1));
+    setLoading(true);
+
+    try {
+      const res = await fetch(
+        `https://artifacts-tracker-server-one.vercel.app/artifacts/${_id}/like`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user.accessToken}`,
+          },
+          body: JSON.stringify({ liked: newLiked }),
+        }
+      );
+
+      if (!res.ok) throw new Error("Failed to update like count");
+
+      const url = newLiked
+        ? "https://artifacts-tracker-server-one.vercel.app/liked-artifacts"
+        : "https://artifacts-tracker-server-one.vercel.app/liked-artifacts/unlike";
+
+      const likeRes = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.accessToken}`,
+        },
+        body: JSON.stringify({
+          artifactId: _id,
+          userEmail: user.email,
+        }),
+      });
+
+      if (!likeRes.ok) {
+        throw new Error(newLiked ? "Failed to like artifact" : "Failed to unlike artifact");
+      }
+    } catch (err) {
+      // Rollback UI changes
+      setLiked(!newLiked);
+      setLikeCount((prev) => prev - (newLiked ? 1 : -1));
+      alert(err.message || "Error while updating like status");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <motion.div
@@ -98,14 +107,13 @@ const ArtifactCard = ({ artifact }) => {
           {name}
         </h2>
         <p className="text-sm text-gray-600 flex-1">
-          {description?.length > 100
-            ? description.slice(0, 100) + "..."
-            : description}
+          {description?.length > 100 ? `${description.slice(0, 100)}...` : description}
         </p>
 
         <div className="flex justify-between items-center mt-4">
           <button
             onClick={toggleLike}
+            disabled={loading}
             className={`flex items-center gap-2 text-sm font-semibold transition-all duration-300 ${
               liked ? "text-red-600" : "text-gray-400 hover:text-red-500"
             }`}
