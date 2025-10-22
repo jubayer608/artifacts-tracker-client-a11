@@ -42,7 +42,7 @@ const restorers = [
 
 const RestorerSpotlight = () => {
   return (
-    <section className="bg-[#fdf6e3] dark:bg-[#1a1a1a] py-20 px-6 md:px-20 font-serif overflow-x-hidden">
+    <section className="bg-[#fdf6e3] py-20 px-6 md:px-20 font-serif overflow-x-hidden">
       <div className="max-w-7xl mx-auto text-center mb-14">
         <h2 className="text-4xl md:text-5xl font-bold text-[#5d4634] dark:text-[#d4a017] mb-4">
           Restorers Spotlight

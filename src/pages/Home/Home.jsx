@@ -10,29 +10,39 @@ const Home = () => {
   return (
     <div className="w-full">
       {/* Hero Section */}
-      <div className="px-4 md:px-8 lg:px-16 py-8">
+      <div className="w-full px-6 md:px-20 py-10">
         <BannerSlider></BannerSlider>
       </div>
       
       {/* Featured Artifacts Section */}
-      <FeaturedArtifactsSection></FeaturedArtifactsSection>
+      <div className="w-full">
+        <FeaturedArtifactsSection></FeaturedArtifactsSection>
+      </div>
       
       {/* Statistics Section */}
-      <StatsSection></StatsSection>
+      <div className="w-full">
+        <StatsSection></StatsSection>
+      </div>
       
       {/* Artifact Journey Section */}
-      <ArtifactJourney></ArtifactJourney>
+      <div className="w-full">
+        <ArtifactJourney></ArtifactJourney>
+      </div>
       
       {/* Restorer Spotlight Section */}
-      <div className="px-4 md:px-8 lg:px-16 py-8 w-full">
+      <div className="w-full">
         <RestorerSpotlight></RestorerSpotlight>
       </div>
       
       {/* Reviews Section */}
-      <ReviewsSection></ReviewsSection>
+      <div className="w-full">
+        <ReviewsSection></ReviewsSection>
+      </div>
       
       {/* Newsletter Section */}
-      <NewsletterSection></NewsletterSection>
+      <div className="w-full">
+        <NewsletterSection></NewsletterSection>
+      </div>
     </div>
   );
 };

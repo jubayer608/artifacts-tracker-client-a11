@@ -14,7 +14,6 @@ const AllArtifacts = () => {
   const [showFilters, setShowFilters] = useState(false);
 
   useEffect(() => {
-    // Load all artifacts by default
     performSearch();
   }, [query, sortBy, sortOrder]);
 
