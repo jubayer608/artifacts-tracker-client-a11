@@ -13,7 +13,7 @@ const TitleManager = () => {
       if (path === '/add-artifact') return 'Add Artifact | Historical Artifacts';
       if (path === '/liked-artifacts') return 'Liked Artifacts | Historical Artifacts';
       if (path === '/my-artifacts') return 'My Artifacts | Historical Artifacts';
-      if (path.startsWith('/artifact/')) return 'Artifact Details | Historical Artifacts';
+      if (path.startsWith('/artifacts/')) return 'Artifact Details | Historical Artifacts';
       if (path.startsWith('/update-artifact/')) return 'Update Artifact | Historical Artifacts';
       return '404 Not Found | Historical Artifacts';
     };

@@ -21,21 +21,21 @@ const FeaturedArtifactsSection = () => {
   }, []);
 
   return (
-    <section className="bg-[#fdf6e3] py-20 px-6 md:px-20 font-serif min-h-screen">
+    <section className="bg-base-100 py-20 px-6 md:px-20 font-serif min-h-screen">
       <div className="max-w-7xl mx-auto">
         
         <div className="text-center mb-14">
-          <h2 className="text-4xl md:text-5xl font-bold text-[#5d4634] mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-base-content mb-4">
             Featured Artifacts
           </h2>
-          <p className="text-gray-700 text-lg max-w-2xl mx-auto">
+          <p className="opacity-80 text-lg max-w-2xl mx-auto">
             Discover the most admired historical treasures, loved by the community.
           </p>
         </div>
 
        
         {loading ? (
-          <LoadingSpinner text="Loading featured artifacts..." />
+          <div className="text-center"><span className="loading loading-spinner loading-lg" aria-label="Loading" /></div>
         ) : artifacts.length > 0 ? (
           <>
             <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
@@ -46,15 +46,11 @@ const FeaturedArtifactsSection = () => {
 
           
             <div className="mt-12 text-center">
-              <Link to="/artifacts">
-                <button className="bg-[#5d4634] text-[#fdf6e3] px-6 py-3 rounded-lg hover:bg-[#4b3727] transition-all text-lg font-medium">
-                  See All Artifacts
-                </button>
-              </Link>
+              <Link to="/artifacts" className="btn btn-primary text-lg">See All Artifacts</Link>
             </div>
           </>
         ) : (
-          <p className="text-center text-gray-600">No featured artifacts found.</p>
+          <p className="text-center opacity-70">No featured artifacts found.</p>
         )}
       </div>
     </section>
