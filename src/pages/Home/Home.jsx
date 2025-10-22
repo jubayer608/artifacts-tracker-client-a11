@@ -10,9 +10,15 @@ const Home = () => {
       <div className="m-10">
         <BannerSlider></BannerSlider>
       </div>
+      
+      {/* Featured Artifacts */}
       <FeaturedArtifactsSection></FeaturedArtifactsSection>
+      
+      {/* Artifact Journey */}
       <ArtifactJourney></ArtifactJourney>
-      <div className="m-10 w-full mx-auto">
+      
+      {/* Restorer Spotlight */}
+      <div className="m-4 md:m-10 w-full mx-auto">
         <RestorerSpotlight></RestorerSpotlight>
       </div>
       <Newsletter />

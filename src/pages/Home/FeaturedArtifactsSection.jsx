@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ArtifactCard from '../Shared/ArtifactCard';
 import { Link } from 'react-router';
+import LoadingSpinner from '../../components/LoadingSpinner';
 
 const FeaturedArtifactsSection = () => {
   const [artifacts, setArtifacts] = useState([]);
