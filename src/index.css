@@ -76,3 +76,51 @@
 [data-theme="dark"] .border-\[#c8b8a5\] {
   border-color: #555555 !important;
 }
+
+/* Dark mode text color fixes */
+[data-theme="dark"] .text-base-content {
+  color: #e5e5e5 !important;
+}
+
+[data-theme="dark"] .text-\[#e5ddca\] {
+  color: #c0c0c0 !important;
+}
+
+[data-theme="dark"] .opacity-80 {
+  opacity: 0.8 !important;
+}
+
+[data-theme="dark"] .opacity-70 {
+  opacity: 0.7 !important;
+}
+
+/* Dark mode button fixes */
+[data-theme="dark"] .btn-primary {
+  background-color: #8B7355 !important;
+  border-color: #8B7355 !important;
+  color: #e5e5e5 !important;
+}
+
+[data-theme="dark"] .btn-primary:hover {
+  background-color: #A68B5B !important;
+  border-color: #A68B5B !important;
+}
+
+[data-theme="dark"] .btn-outline {
+  border-color: #8B7355 !important;
+  color: #8B7355 !important;
+}
+
+[data-theme="dark"] .btn-outline:hover {
+  background-color: #8B7355 !important;
+  color: #e5e5e5 !important;
+}
+
+/* Dark mode card and surface fixes */
+[data-theme="dark"] .bg-base-100 {
+  background-color: #2d2d2d !important;
+}
+
+[data-theme="dark"] .border-primary {
+  border-color: #8B7355 !important;
+}

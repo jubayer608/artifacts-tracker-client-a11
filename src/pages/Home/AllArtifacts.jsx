@@ -5,7 +5,7 @@ import { FiSearch, FiFilter, FiArrowUp, FiArrowDown, FiGrid, FiList } from "reac
 
 const AllArtifacts = () => {
   const [artifacts, setArtifacts] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [query, setQuery] = useState("");
   const [sortBy, setSortBy] = useState("name");
@@ -14,9 +14,8 @@ const AllArtifacts = () => {
   const [showFilters, setShowFilters] = useState(false);
 
   useEffect(() => {
-    if (query.trim() || sortBy !== "name" || sortOrder !== "asc") {
-      performSearch();
-    }
+    // Always load artifacts on component mount and when filters change
+    performSearch();
   }, [query, sortBy, sortOrder]);
 
   const performSearch = async () => {
@@ -40,7 +39,6 @@ const AllArtifacts = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    setPage(1);
     setQuery(search.trim());
   };
 

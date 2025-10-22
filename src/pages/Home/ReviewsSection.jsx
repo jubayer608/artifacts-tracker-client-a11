@@ -55,7 +55,7 @@ const reviews = [
 
 const ReviewsSection = () => {
   return (
-    <section className="bg-white py-20 px-6 md:px-20 font-serif">
+    <section className="bg-white dark:bg-gray-900 py-20 px-6 md:px-20 font-serif">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -64,10 +64,10 @@ const ReviewsSection = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-[#5d4634] mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-[#5d4634] dark:text-[#8B7355] mb-4">
             What Our Community Says
           </h2>
-          <p className="text-gray-700 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-700 dark:text-gray-300 text-lg max-w-2xl mx-auto">
             Hear from archaeologists, curators, and history enthusiasts who use our platform to explore and preserve history.
           </p>
         </motion.div>
@@ -89,8 +89,8 @@ const ReviewsSection = () => {
                   className="w-12 h-12 rounded-full object-cover mr-4"
                 />
                 <div>
-                  <h4 className="font-bold text-[#5d4634]">{review.name}</h4>
-                  <p className="text-sm text-gray-600">{review.role}</p>
+                  <h4 className="font-bold text-[#5d4634] dark:text-[#8B7355]">{review.name}</h4>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">{review.role}</p>
                 </div>
               </div>
 
@@ -102,7 +102,7 @@ const ReviewsSection = () => {
 
               <div className="relative">
                 <FaQuoteLeft className="text-[#5d4634] text-2xl mb-2 opacity-30" />
-                <p className="text-gray-700 italic leading-relaxed">
+                <p className="text-gray-700 dark:text-gray-300 italic leading-relaxed">
                   "{review.comment}"
                 </p>
               </div>
@@ -117,7 +117,7 @@ const ReviewsSection = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-center mt-12"
         >
-          <div className="bg-[#5d4634] text-[#fdf6e3] rounded-2xl p-8 max-w-4xl mx-auto">
+          <div className="bg-[#5d4634] dark:bg-[#8B7355] text-[#fdf6e3] rounded-2xl p-8 max-w-4xl mx-auto">
             <h3 className="text-2xl font-bold mb-4">Join Our Growing Community</h3>
             <p className="text-lg mb-6">
               Over 10,000+ professionals and enthusiasts trust Artifacts Tracker for their historical research and documentation needs.
