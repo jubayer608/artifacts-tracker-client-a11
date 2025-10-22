@@ -42,12 +42,12 @@ const restorers = [
 
 const RestorerSpotlight = () => {
   return (
-    <section className="bg-[#fdf6e3]   py-20 px-6 md:px-20 font-serif overflow-x-hidden">
+    <section className="bg-base-100 dark:bg-gray-900 py-20 px-6 md:px-20 font-serif overflow-x-hidden">
       <div className="max-w-7xl mx-auto text-center mb-14">
-        <h2 className="text-4xl md:text-5xl font-bold text-[#5d4634] mb-4">
+        <h2 className="text-4xl md:text-5xl font-bold text-base-content dark:text-gray-100 mb-4">
           Restorers Spotlight
         </h2>
-        <p className="text-gray-700 text-lg max-w-2xl mx-auto">
+        <p className="text-base-content/70 dark:text-gray-300 text-lg max-w-2xl mx-auto">
           Meet the skilled individuals working tirelessly to preserve our
           historical artifacts. Their dedication helps bring ancient wonders
           back to life.
