@@ -33,10 +33,10 @@ const ArtifactJourney = () => {
   return (
     <section className="bg-[#fdf6e3] my-14 py-20 px-6 md:px-20 font-serif">
       <div className="max-w-6xl mx-auto text-center mb-12">
-        <h2 className="text-4xl md:text-5xl font-bold text-[#5d4634] mb-4">
+        <h2 className="text-4xl md:text-5xl font-bold text-base-content mb-4">
           Journey of a Historical Artifact
         </h2>
-        <p className="text-gray-700 text-lg max-w-2xl mx-auto">
+        <p className="opacity-80 text-lg max-w-2xl mx-auto">
           Follow the timeline of how an ancient artifact moves from excavation to exhibition.
         </p>
       </div>
@@ -44,7 +44,7 @@ const ArtifactJourney = () => {
         {timeline.map((step, idx) => (
           <motion.div
             key={idx}
-            className="p-6 bg-[#fdf6e3] border-l-4 border-[#5d4634] rounded-lg shadow-md hover:shadow-lg transition duration-300"
+            className="p-6 bg-base-100 border-l-4 border-primary rounded-lg shadow-md hover:shadow-lg transition duration-300"
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

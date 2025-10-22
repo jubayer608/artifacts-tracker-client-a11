@@ -3,35 +3,35 @@ import ArtifactJourney from "./ArtifactJourney";
 import FeaturedArtifactsSection from "./FeaturedArtifactsSection";
 import RestorerSpotlight from "./RestorerSpotlight";
 import NewsletterSection from "./NewsletterSection";
-import TestimonialsSection from "./TestimonialsSection";
-import AboutSection from "./AboutSection";
+import ReviewsSection from "./ReviewsSection";
+import StatsSection from "./StatsSection";
 
 const Home = () => {
   return (
-    <div className="min-h-screen">
+    <div>
       {/* Hero Section */}
-      <div className="m-4 md:m-10">
+      <div className="m-10">
         <BannerSlider></BannerSlider>
       </div>
       
-      {/* Featured Artifacts */}
+      {/* Featured Artifacts Section */}
       <FeaturedArtifactsSection></FeaturedArtifactsSection>
       
-      {/* Artifact Journey */}
+      {/* Statistics Section */}
+      <StatsSection></StatsSection>
+      
+      {/* Artifact Journey Section */}
       <ArtifactJourney></ArtifactJourney>
       
-      {/* Restorer Spotlight */}
-      <div className="m-4 md:m-10 w-full mx-auto">
+      {/* Restorer Spotlight Section */}
+      <div className="m-10 w-full mx-auto">
         <RestorerSpotlight></RestorerSpotlight>
       </div>
       
-      {/* Testimonials */}
-      <TestimonialsSection></TestimonialsSection>
+      {/* Reviews Section */}
+      <ReviewsSection></ReviewsSection>
       
-      {/* About Section */}
-      <AboutSection></AboutSection>
-      
-      {/* Newsletter */}
+      {/* Newsletter Section */}
       <NewsletterSection></NewsletterSection>
     </div>
   );

@@ -16,6 +16,13 @@ const ArtifactDetails = () => {
       .then((data) => {
         setArtifact(data);
         setLikeCount(data.likeCount || 0);
+        try {
+          const key = "recently_viewed";
+          const current = JSON.parse(localStorage.getItem(key) || "[]");
+          const filtered = current.filter((a) => a._id !== data._id);
+          const next = [{ _id: data._id, name: data.name, image: data.image, description: data.description, likeCount: data.likeCount }, ...filtered].slice(0, 8);
+          localStorage.setItem(key, JSON.stringify(next));
+        } catch {}
       });
   }, [id]);
 
