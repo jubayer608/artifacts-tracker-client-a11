@@ -8,31 +8,41 @@ import StatsSection from "./StatsSection";
 
 const Home = () => {
   return (
-    <div>
+    <div className="bg-base-100">
       {/* Hero Section */}
-      <div className="m-10">
-        <BannerSlider></BannerSlider>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10 md:mt-6">
+        <BannerSlider />
       </div>
-      
+
       {/* Featured Artifacts Section */}
-      <FeaturedArtifactsSection></FeaturedArtifactsSection>
-      
-      {/* Statistics Section */}
-      <StatsSection></StatsSection>
-      
-      {/* Artifact Journey Section */}
-      <ArtifactJourney></ArtifactJourney>
-      
-      {/* Restorer Spotlight Section */}
-      <div className="m-10 w-full mx-auto">
-        <RestorerSpotlight></RestorerSpotlight>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <FeaturedArtifactsSection />
       </div>
-      
+
+      {/* Statistics Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <StatsSection />
+      </div>
+
+      {/* Artifact Journey Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <ArtifactJourney />
+      </div>
+
+      {/* Restorer Spotlight Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <RestorerSpotlight />
+      </div>
+
       {/* Reviews Section */}
-      <ReviewsSection></ReviewsSection>
-      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <ReviewsSection />
+      </div>
+
       {/* Newsletter Section */}
-      <NewsletterSection></NewsletterSection>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <NewsletterSection />
+      </div>
     </div>
   );
 };

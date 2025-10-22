@@ -1,6 +1,6 @@
 import { RouterProvider } from 'react-router';
 import AuthProvider from './contexts/AuthContext/AuthProvider';
-import ThemeProvider from './contexts/ThemeContext/ThemeProvider';
+import { ThemeProvider } from './contexts/ThemeContext';
 import router from './router/router';
 import './App.css'
 

@@ -6,6 +6,8 @@ const ThemeContext = createContext({
   theme: "system",
   resolvedTheme: "light",
   setTheme: (_theme) => {},
+  toggleTheme: () => {},
+  isDark: false,
 });
 
 export const ThemeProvider = ({ children }) => {
@@ -54,8 +56,19 @@ export const ThemeProvider = ({ children }) => {
     }
   }, [theme, resolvedTheme]);
 
+  const toggleTheme = () => {
+    // If on system, toggle to explicit opposite of current resolved
+    if (theme === "system") {
+      setTheme(resolvedTheme === "dark" ? "light" : "dark");
+    } else {
+      setTheme(theme === "dark" ? "light" : "dark");
+    }
+  };
+
+  const isDark = resolvedTheme === "dark";
+
   const value = useMemo(
-    () => ({ theme, resolvedTheme, setTheme }),
+    () => ({ theme, resolvedTheme, setTheme, toggleTheme, isDark }),
     [theme, resolvedTheme]
   );
 

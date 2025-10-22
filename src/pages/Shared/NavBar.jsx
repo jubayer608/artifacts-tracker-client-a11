@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Link, NavLink } from "react-router";
 import { AuthContext } from "../../contexts/AuthContext/AuthContext";
-import { useTheme } from "../../contexts/ThemeContext/ThemeProvider";
+import { useTheme } from "../../contexts/ThemeContext";
 import {
   FiLogOut,
   FiHeart,
@@ -30,7 +30,7 @@ const NavBar = () => {
     `font-display text-base transition-colors duration-200 ${
       isActive
         ? "text-primary font-semibold border-b-2 border-primary pb-1"
-        : "hover:text-primary"
+        : "text-base-content/80 hover:text-primary"
     }`;
 
   const publicNavLinks = (

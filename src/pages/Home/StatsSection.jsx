@@ -31,8 +31,8 @@ const stats = [
 
 const StatsSection = () => {
   return (
-    <section className="bg-gradient-to-br from-[#5d4634] to-[#4b3727] py-20 px-6 md:px-20 font-serif">
-      <div className="max-w-7xl mx-auto">
+    <section className="bg-gradient-to-br from-primary-900 to-[#4b3727] py-20 font-serif">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -58,8 +58,8 @@ const StatsSection = () => {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               className="text-center"
             >
-              <div className="bg-[#fdf6e3] rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 group">
-                <div className="text-[#5d4634] mb-4 flex justify-center group-hover:scale-110 transition-transform duration-300">
+              <div className="bg-base-100 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 group">
+                <div className="text-primary mb-4 flex justify-center group-hover:scale-110 transition-transform duration-300">
                   {stat.icon}
                 </div>
                 <motion.div
@@ -67,11 +67,11 @@ const StatsSection = () => {
                   whileInView={{ scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.8, delay: index * 0.1 + 0.3 }}
-                  className="text-4xl md:text-5xl font-bold text-[#5d4634] mb-2"
+                  className="text-4xl md:text-5xl font-bold text-primary mb-2"
                 >
                   {stat.number}
                 </motion.div>
-                <h3 className="text-xl font-bold text-[#5d4634] mb-2">
+                <h3 className="text-xl font-bold text-primary mb-2">
                   {stat.label}
                 </h3>
                 <p className="text-gray-600 text-sm">
@@ -89,23 +89,23 @@ const StatsSection = () => {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="text-center mt-16"
         >
-          <div className="bg-[#fdf6e3] rounded-2xl p-8 max-w-4xl mx-auto">
-            <h3 className="text-2xl font-bold text-[#5d4634] mb-4">
+          <div className="bg-base-100 rounded-2xl p-8 max-w-4xl mx-auto">
+            <h3 className="text-2xl font-bold text-base-content mb-4">
               Be Part of Our Growing Community
             </h3>
-            <p className="text-gray-700 text-lg mb-6">
+            <p className="text-base-content/80 text-lg mb-6">
               Join thousands of professionals and enthusiasts who are making history accessible to everyone.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href="/register"
-                className="btn bg-[#5d4634] text-[#fdf6e3] hover:bg-[#4b3727] font-semibold px-8 py-3 rounded-lg transition-all duration-200"
+                className="btn btn-primary font-semibold px-8 py-3 rounded-lg transition-all duration-200"
               >
                 Start Your Journey
               </a>
               <a
                 href="/about"
-                className="btn btn-outline border-[#5d4634] text-[#5d4634] hover:bg-[#5d4634] hover:text-[#fdf6e3] font-semibold px-8 py-3 rounded-lg transition-all duration-200"
+                className="btn btn-outline border-primary text-primary hover:bg-primary hover:text-primary-content font-semibold px-8 py-3 rounded-lg transition-all duration-200"
               >
                 Learn More
               </a>

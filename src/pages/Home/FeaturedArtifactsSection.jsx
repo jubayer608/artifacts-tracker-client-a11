@@ -30,8 +30,8 @@ const FeaturedArtifactsSection = () => {
   }, []);
 
   return (
-    <section className="bg-[#fdf6e3] py-20 mt-14 px-6 md:px-20 font-serif min-h-screen">
-      <div className="max-w-7xl mx-auto">
+    <section className="bg-base-100 py-20 font-serif">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <div className="text-center mb-14">
           <h2 className="text-4xl md:text-5xl font-bold text-base-content mb-4">
