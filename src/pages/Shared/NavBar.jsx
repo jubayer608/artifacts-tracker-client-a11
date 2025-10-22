@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Link, NavLink } from "react-router";
 import { AuthContext } from "../../contexts/AuthContext/AuthContext";
-import { useTheme } from "../../contexts/ThemeContext/ThemeProvider";
+import { useTheme } from "../../contexts/ThemeContext";
 import {
   FiLogOut,
   FiHeart,
@@ -14,7 +14,8 @@ import {
 
 const NavBar = () => {
   const { user, signOutUser } = useContext(AuthContext);
-  const { theme, toggleTheme, isDark } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
+  const isDark = resolvedTheme === "dark";
 
   const handleSignOut = () => {
     signOutUser()
@@ -94,7 +95,7 @@ const NavBar = () => {
           <div className="flex items-center space-x-4">
             {/* Theme Toggle */}
             <button
-              onClick={toggleTheme}
+              onClick={() => setTheme(isDark ? "light" : "dark")}
               className="btn btn-ghost btn-sm text-primary hover:bg-base-200 transition-all duration-200"
               title={`Switch to ${isDark ? "light" : "dark"} mode`}
             >

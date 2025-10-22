@@ -17,7 +17,7 @@ const NewsletterSection = () => {
   };
 
   return (
-    <section className="bg-[#5d4634] py-20 px-6 md:px-20 font-serif">
+    <section className="bg-primary py-20 px-6 md:px-20 font-serif">
       <div className="max-w-4xl mx-auto text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -26,15 +26,15 @@ const NewsletterSection = () => {
           transition={{ duration: 0.8 }}
         >
           <div className="flex justify-center mb-6">
-            <div className="p-4 bg-[#fdf6e3] rounded-full">
-              <FiMail className="w-8 h-8 text-[#5d4634]" />
+            <div className="p-4 bg-base-100 rounded-full">
+              <FiMail className="w-8 h-8 text-primary" />
             </div>
           </div>
           
-          <h2 className="text-3xl md:text-4xl font-bold text-[#fdf6e3] mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-primary-content mb-4">
             Stay Updated
           </h2>
-          <p className="text-[#e5ddca] text-lg mb-8 max-w-2xl mx-auto">
+          <p className="text-primary-content/80 text-lg mb-8 max-w-2xl mx-auto">
             Get the latest updates on new artifacts, restoration projects, and historical discoveries delivered to your inbox.
           </p>
 
@@ -47,14 +47,14 @@ const NewsletterSection = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email address"
-                    className="w-full px-4 py-3 pr-12 rounded-lg border-2 border-[#e5ddca] focus:border-[#fdf6e3] focus:outline-none text-gray-800"
+                    className="w-full px-4 py-3 pr-12 rounded-lg border-2 border-base-300 focus:border-primary-content focus:outline-none bg-base-100 text-base-content"
                     required
                   />
-                  <FiMail className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                  <FiMail className="absolute right-4 top-1/2 transform -translate-y-1/2 text-base-content/50" />
                 </div>
                 <button
                   type="submit"
-                  className="btn bg-[#fdf6e3] text-[#5d4634] hover:bg-[#e5ddca] font-semibold px-6 py-3 rounded-lg transition-all duration-200 flex items-center justify-center gap-2"
+                  className="btn bg-base-100 text-primary hover:bg-base-200 font-semibold px-6 py-3 rounded-lg transition-all duration-200 flex items-center justify-center gap-2"
                 >
                   <FiSend className="w-4 h-4" />
                   Subscribe
@@ -65,13 +65,13 @@ const NewsletterSection = () => {
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="bg-[#fdf6e3] text-[#5d4634] px-6 py-4 rounded-lg font-semibold"
+              className="bg-base-100 text-primary px-6 py-4 rounded-lg font-semibold"
             >
               Thank you for subscribing! 🎉
             </motion.div>
           )}
 
-          <p className="text-[#e5ddca] text-sm mt-4">
+          <p className="text-primary-content/80 text-sm mt-4">
             We respect your privacy. Unsubscribe at any time.
           </p>
         </motion.div>

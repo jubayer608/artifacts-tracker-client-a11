@@ -55,7 +55,7 @@ const reviews = [
 
 const ReviewsSection = () => {
   return (
-    <section className="bg-white py-20 px-6 md:px-20 font-serif">
+    <section className="bg-base-100 py-20 px-6 md:px-20 font-serif">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -64,10 +64,10 @@ const ReviewsSection = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-[#5d4634] mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4">
             What Our Community Says
           </h2>
-          <p className="text-gray-700 text-lg max-w-2xl mx-auto">
+          <p className="text-base-content/70 text-lg max-w-2xl mx-auto">
             Hear from archaeologists, curators, and history enthusiasts who use our platform to explore and preserve history.
           </p>
         </motion.div>
@@ -80,7 +80,7 @@ const ReviewsSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="bg-[#fdf6e3] rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300"
+              className="bg-base-200 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300"
             >
               <div className="flex items-center mb-4">
                 <img
@@ -89,8 +89,8 @@ const ReviewsSection = () => {
                   className="w-12 h-12 rounded-full object-cover mr-4"
                 />
                 <div>
-                  <h4 className="font-bold text-[#5d4634]">{review.name}</h4>
-                  <p className="text-sm text-gray-600">{review.role}</p>
+                  <h4 className="font-bold text-primary">{review.name}</h4>
+                  <p className="text-sm text-base-content/70">{review.role}</p>
                 </div>
               </div>
 
@@ -101,8 +101,8 @@ const ReviewsSection = () => {
               </div>
 
               <div className="relative">
-                <FaQuoteLeft className="text-[#5d4634] text-2xl mb-2 opacity-30" />
-                <p className="text-gray-700 italic leading-relaxed">
+                <FaQuoteLeft className="text-primary text-2xl mb-2 opacity-30" />
+                <p className="text-base-content/80 italic leading-relaxed">
                   "{review.comment}"
                 </p>
               </div>
@@ -117,7 +117,7 @@ const ReviewsSection = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-center mt-12"
         >
-          <div className="bg-[#5d4634] text-[#fdf6e3] rounded-2xl p-8 max-w-4xl mx-auto">
+          <div className="bg-primary text-primary-content rounded-2xl p-8 max-w-4xl mx-auto">
             <h3 className="text-2xl font-bold mb-4">Join Our Growing Community</h3>
             <p className="text-lg mb-6">
               Over 10,000+ professionals and enthusiasts trust Artifacts Tracker for their historical research and documentation needs.
@@ -125,13 +125,13 @@ const ReviewsSection = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href="/register"
-                className="btn bg-[#fdf6e3] text-[#5d4634] hover:bg-[#e5ddca] font-semibold px-6 py-3 rounded-lg transition-all duration-200"
+                className="btn bg-base-100 text-primary hover:bg-base-200 font-semibold px-6 py-3 rounded-lg transition-all duration-200"
               >
                 Join Now
               </a>
               <a
                 href="/artifacts"
-                className="btn btn-outline border-[#fdf6e3] text-[#fdf6e3] hover:bg-[#fdf6e3] hover:text-[#5d4634] font-semibold px-6 py-3 rounded-lg transition-all duration-200"
+                className="btn btn-outline border-primary-content text-primary-content hover:bg-primary-content hover:text-primary font-semibold px-6 py-3 rounded-lg transition-all duration-200"
               >
                 Explore Artifacts
               </a>
