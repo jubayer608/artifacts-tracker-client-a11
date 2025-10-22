@@ -16,6 +16,8 @@ import About from "../pages/About/About";
 import Search from "../pages/Search/Search";
 import CompareArtifacts from "../pages/Compare/CompareArtifacts";
 import NotFound from "../routes/NotFound";
+import About from "../pages/Static/About";
+import Newsletter from "../pages/Static/Newsletter";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +27,14 @@ const router = createBrowserRouter([
         {
             index:true,
             Component:Home
+        },
+        {
+          path:"/about",
+          Component:About
+        },
+        {
+          path:"/newsletter",
+          Component:Newsletter
         },
         {
           path:"/artifacts",
@@ -49,6 +59,22 @@ const router = createBrowserRouter([
         {
           path:"/my-artifacts",
           element:<PrivateRoute><MyArtifactsPage></MyArtifactsPage></PrivateRoute>
+        },
+        {
+          path:"/collections",
+          element:<PrivateRoute><CollectionsPage></CollectionsPage></PrivateRoute>
+        },
+        {
+          path:"/comparison",
+          element:<PrivateRoute><ArtifactComparison></ArtifactComparison></PrivateRoute>
+        },
+        {
+          path:"/timeline/:id",
+          element:<PrivateRoute><ArtifactTimeline></ArtifactTimeline></PrivateRoute>
+        },
+        {
+          path:"/about",
+          Component:AboutPage
         },
         {
            path:"/update-artifact/:id",

@@ -1,12 +1,78 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
-
 @import "tailwindcss";
 @plugin "daisyui";
-
 
 .playfair-display {
   font-family: "Playfair Display", serif;
   font-weight: 400;
   font-style: normal;
+}
+
+/* Dark mode styles */
+[data-theme="dark"] {
+  --color-primary: #8B7355;
+  --color-secondary: #A68B5B;
+  --color-accent: #D4C4A8;
+  --color-background: #1a1a1a;
+  --color-surface: #2d2d2d;
+  --color-text: #e5e5e5;
+}
+
+[data-theme="light"] {
+  --color-primary: #5d4634;
+  --color-secondary: #4b3727;
+  --color-accent: #fdf6e3;
+  --color-background: #ffffff;
+  --color-surface: #fdf6e3;
+  --color-text: #333333;
+}
+
+/* Global dark mode overrides */
+[data-theme="dark"] .bg-\[#fdf6e3\] {
+  background-color: #1a1a1a !important;
+}
+
+[data-theme="dark"] .text-\[#5d4634\] {
+  color: #8B7355 !important;
+}
+
+[data-theme="dark"] .bg-\[#5d4634\] {
+  background-color: #8B7355 !important;
+}
+
+[data-theme="dark"] .border-\[#5d4634\] {
+  border-color: #8B7355 !important;
+}
+
+[data-theme="dark"] .ring-\[#5d4634\] {
+  --tw-ring-color: #8B7355 !important;
+}
+
+[data-theme="dark"] .hover\:bg-\[#4b3727\]:hover {
+  background-color: #A68B5B !important;
+}
+
+[data-theme="dark"] .bg-\[#f5f0e8\] {
+  background-color: #2d2d2d !important;
+}
+
+[data-theme="dark"] .text-gray-600 {
+  color: #a0a0a0 !important;
+}
+
+[data-theme="dark"] .text-gray-700 {
+  color: #c0c0c0 !important;
+}
+
+[data-theme="dark"] .text-gray-800 {
+  color: #e5e5e5 !important;
+}
+
+[data-theme="dark"] .bg-white {
+  background-color: #2d2d2d !important;
+}
+
+[data-theme="dark"] .border-\[#c8b8a5\] {
+  border-color: #555555 !important;
 }

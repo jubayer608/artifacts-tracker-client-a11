@@ -40,6 +40,7 @@ const AllArtifacts = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
+    setPage(1);
     setQuery(search.trim());
   };
 
