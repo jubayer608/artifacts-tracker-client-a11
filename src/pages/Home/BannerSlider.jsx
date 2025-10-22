@@ -93,10 +93,10 @@ const BannerSlider = () => {
       </Swiper>
 
       
-      <button className="custom-prev hidden md:block absolute top-1/2 left-4 transform -translate-y-1/2 z-50 bg-[#5d4634]/80 text-[#fdf6e3] text-xl px-3 py-2 rounded-full hover:bg-[#4b3727] transition">
+      <button className="custom-prev hidden md:block absolute top-1/2 left-4 transform -translate-y-1/2 z-50 bg-[#5d4634]/80 dark:bg-[#8B7355]/80 text-[#fdf6e3] text-xl px-3 py-2 rounded-full hover:bg-[#4b3727] dark:hover:bg-[#A68B5B] transition">
         &larr;
       </button>
-      <button className="custom-next hidden md:block absolute top-1/2 right-4 transform -translate-y-1/2 z-50 bg-[#5d4634]/80 text-[#fdf6e3] text-xl px-3 py-2 rounded-full hover:bg-[#4b3727] transition">
+      <button className="custom-next hidden md:block absolute top-1/2 right-4 transform -translate-y-1/2 z-50 bg-[#5d4634]/80 dark:bg-[#8B7355]/80 text-[#fdf6e3] text-xl px-3 py-2 rounded-full hover:bg-[#4b3727] dark:hover:bg-[#A68B5B] transition">
         &rarr;
       </button>
     </section>

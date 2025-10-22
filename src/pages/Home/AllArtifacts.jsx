@@ -5,7 +5,7 @@ import { FiSearch, FiFilter, FiArrowUp, FiArrowDown, FiGrid, FiList } from "reac
 
 const AllArtifacts = () => {
   const [artifacts, setArtifacts] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [query, setQuery] = useState("");
   const [sortBy, setSortBy] = useState("name");

@@ -40,10 +40,10 @@ const StatsSection = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-[#fdf6e3] mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-primary-content dark:text-gray-100 mb-4">
             Our Impact in Numbers
           </h2>
-          <p className="text-[#e5ddca] text-lg max-w-2xl mx-auto">
+          <p className="text-primary-content/80 dark:text-gray-300 text-lg max-w-2xl mx-auto">
             Discover the scale of our community's contribution to preserving and documenting historical artifacts worldwide.
           </p>
         </motion.div>
@@ -74,7 +74,7 @@ const StatsSection = () => {
                 <h3 className="text-xl font-bold text-primary mb-2">
                   {stat.label}
                 </h3>
-                <p className="text-gray-600 text-sm">
+                <p className="text-base-content/60 dark:text-gray-400 text-sm">
                   {stat.description}
                 </p>
               </div>

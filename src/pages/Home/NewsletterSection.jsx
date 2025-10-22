@@ -50,7 +50,7 @@ const NewsletterSection = () => {
                   className="w-full px-4 py-3 pr-12 rounded-lg border-2 border-base-100/40 focus:border-base-100 focus:outline-none text-gray-900"
                     required
                   />
-                  <FiMail className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                  <FiMail className="absolute right-4 top-1/2 transform -translate-y-1/2 text-base-content/50" />
                 </div>
                 <button
                   type="submit"

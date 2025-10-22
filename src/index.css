@@ -34,23 +34,23 @@
 }
 
 [data-theme="dark"] .text-\[#5d4634\] {
-  color: #8B7355 !important;
+  color: #D4C4A8 !important;
 }
 
 [data-theme="dark"] .bg-\[#5d4634\] {
-  background-color: #8B7355 !important;
+  background-color: #d4a017 !important;
 }
 
 [data-theme="dark"] .border-\[#5d4634\] {
-  border-color: #8B7355 !important;
+  border-color: #d4a017 !important;
 }
 
 [data-theme="dark"] .ring-\[#5d4634\] {
-  --tw-ring-color: #8B7355 !important;
+  --tw-ring-color: #d4a017 !important;
 }
 
 [data-theme="dark"] .hover\:bg-\[#4b3727\]:hover {
-  background-color: #A68B5B !important;
+  background-color: #f5d680 !important;
 }
 
 [data-theme="dark"] .bg-\[#f5f0e8\] {
@@ -58,11 +58,11 @@
 }
 
 [data-theme="dark"] .text-gray-600 {
-  color: #a0a0a0 !important;
+  color: #b0b0b0 !important;
 }
 
 [data-theme="dark"] .text-gray-700 {
-  color: #c0c0c0 !important;
+  color: #d0d0d0 !important;
 }
 
 [data-theme="dark"] .text-gray-800 {
@@ -75,4 +75,52 @@
 
 [data-theme="dark"] .border-\[#c8b8a5\] {
   border-color: #555555 !important;
+}
+
+/* Dark mode text color fixes */
+[data-theme="dark"] .text-base-content {
+  color: #e5e5e5 !important;
+}
+
+[data-theme="dark"] .text-\[#e5ddca\] {
+  color: #c0c0c0 !important;
+}
+
+[data-theme="dark"] .opacity-80 {
+  opacity: 0.8 !important;
+}
+
+[data-theme="dark"] .opacity-70 {
+  opacity: 0.7 !important;
+}
+
+/* Dark mode button fixes */
+[data-theme="dark"] .btn-primary {
+  background-color: #8B7355 !important;
+  border-color: #8B7355 !important;
+  color: #e5e5e5 !important;
+}
+
+[data-theme="dark"] .btn-primary:hover {
+  background-color: #A68B5B !important;
+  border-color: #A68B5B !important;
+}
+
+[data-theme="dark"] .btn-outline {
+  border-color: #8B7355 !important;
+  color: #8B7355 !important;
+}
+
+[data-theme="dark"] .btn-outline:hover {
+  background-color: #8B7355 !important;
+  color: #e5e5e5 !important;
+}
+
+/* Dark mode card and surface fixes */
+[data-theme="dark"] .bg-base-100 {
+  background-color: #2d2d2d !important;
+}
+
+[data-theme="dark"] .border-primary {
+  border-color: #8B7355 !important;
 }

@@ -14,7 +14,8 @@ import {
 
 const NavBar = () => {
   const { user, signOutUser } = useContext(AuthContext);
-  const { theme, toggleTheme, isDark } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
+  const isDark = resolvedTheme === "dark";
 
   const handleSignOut = () => {
     signOutUser()
@@ -94,7 +95,7 @@ const NavBar = () => {
           <div className="flex items-center space-x-4">
             {/* Theme Toggle */}
             <button
-              onClick={toggleTheme}
+              onClick={() => setTheme(isDark ? "light" : "dark")}
               className="btn btn-ghost btn-sm text-primary hover:bg-base-200 transition-all duration-200"
               title={`Switch to ${isDark ? "light" : "dark"} mode`}
             >
@@ -134,7 +135,7 @@ const NavBar = () => {
                     role="button"
                     className="btn btn-ghost btn-circle avatar"
                   >
-                    <div className="w-8 h-8 rounded-full ring-2 ring-[#5d4634] ring-offset-2">
+                    <div className="w-8 h-8 rounded-full ring-2 ring-primary ring-offset-2">
                       <img
                         alt="User Profile"
                         src={user.photoURL || "/default-avatar.png"}
